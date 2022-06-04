@@ -1,0 +1,23 @@
+<% layout('layouts/skelton.ejs') %>
+<!--     <title>All Categories</title>
+ -->    <% if (categories.length==0) { %>
+        <title>Empty</title>
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">Well done!</h4>
+            <p>Looks like you have no categories yet</p>
+            <hr>
+            <a type="button" class="btn btn-outline-primary" href="/categories/new">
+                Add New Category
+            </a>
+        </div>
+        </div>
+        <% } else { %>
+         
+            <div class="list-group">
+                <% for( let categoryIndex=0; categoryIndex < categories.length; categoryIndex++ ) { %>
+                    <button type="button" class="list-group-item list-group-item-action" aria-current="true">
+                        <%= categories[categoryIndex].name %>
+                    </button>
+                    <% } %>
+            </div>
+            <% } %> 

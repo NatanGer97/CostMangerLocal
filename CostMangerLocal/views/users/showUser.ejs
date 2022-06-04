@@ -1,0 +1,28 @@
+<% layout('layouts/skelton.ejs') %>
+<title> <%= user.first_name + " " +  user.last_name %> </title>
+<div class="jumbotron">
+    <h1 class="display-4"><%= user.first_name + " " +  user.last_name %></h1>
+    <hr class="my-4">
+    <p class=""><%= user.birthday %> </p>
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+            Actions
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            fffffffff       
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+
+    <p btn class="lead">
+      <a class="btn btn-primary btn-sm" href="/users/<%= user._id%>/costs/" role="button">Show Costs</a>
+      <a class="btn btn-primary btn-sm" href="/users/<%= user._id%>/costs/new" role="button">Add Costs</a>
+      <a class="btn btn-primary btn-sm" href="/users" role="button">All Users</a>
+    </p>   
+  </div>

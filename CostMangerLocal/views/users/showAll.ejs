@@ -1,0 +1,30 @@
+<% layout('layouts/skelton.ejs') %>
+
+<title>Users</title>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="row">Id</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">birthday</th>
+      <th scope="col">marital status</th>
+    </tr>
+  </thead>
+  <tbody>
+     <% for(let  user of users) { %>
+      <tr>
+        <td><a href="/users/<%= user._id%> "><%= user._id %> </a></td>
+          <td><a href="/users/<%= user._id%> "><%= user.first_name%></a></td>
+          <td><%= user.last_name%></td>
+          <td><%= user.birthday %></td>
+          <td><%= user.marital_status %> </td>
+        </tr>
+     <% } %>  
+  </tbody>
+</table>
+
+<a id="addBtn" type="button" class="btn btn-outline-secondary btn-sm" href="/users/new">Add User</a>
+<!-- <script src="/javascripts/newUserClient.js"></script> -->
+

@@ -1,0 +1,35 @@
+<% layout('layouts/skelton.ejs') %>
+    <title>New User</title>
+    <form class="row g-4" action="/users" method="post">
+        <div class="col-md-4">
+            <label for="fName" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="fName" name="first_name">
+        </div>
+        <div class="col-md-4">
+            <label for="lName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="lName" name="last_name">
+        </div>
+        <div class="col-md-4">
+            <label for="inputBirthday" class="form-label">birthday</label>
+            <input type="date" class="form-control" id="inputBirthday" name="birthday">
+        </div>
+    
+        <div class="col-md-4">
+            <label for="Status" class="form-label">Status</label>
+            <select id="Status" class="form-select" name="marital_status">
+                <option selected>select</option>
+                <option>Single</option>
+                <option>Married</option>
+                <option>Divorced</option>
+                <option>Widowed</option>
+            </select>
+        </div>
+         <div class="col-md-4">
+            <label for="userId" class="form-label">Id</label>
+            <input type="hidden" class="form-control" id="userId" value="<%= ++id %>" 
+            name="_id"  >
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary" >Add</button>
+        </div>
+    </form>

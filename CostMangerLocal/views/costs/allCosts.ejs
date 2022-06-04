@@ -1,0 +1,35 @@
+<% layout('layouts/skelton.ejs') %>
+
+    <title>Costs</title>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Description</th>
+                <th scope="col">Sum</th>
+                <th scope="col">Date</th>
+                <th scope="col">Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(let cost of costs) { %>
+                <tr>
+                    <td>
+                        <%= cost.description %></a>
+                    </td>
+                    <td>
+                        <%= cost.sum%></a>
+                    </td>
+                    <td>
+                        <%= cost.date%></a>
+                    </td>
+                    <td>
+                        <%= cost.category%></a>
+                    </td>
+                </tr>
+                <% } %>
+        </tbody>
+    </table>
+    <a id="addBtn" type="button" class="btn btn-outline-secondary btn-sm" href="/users/<%= id%>/costs/new">New Cost</a>
+    <a id="addBtn" type="button" class="btn btn-outline-secondary btn-sm" href="/users/<%= id%>">Back</a>
+    <!-- <script src="/javascripts/newUserClient.js"></script> -->
