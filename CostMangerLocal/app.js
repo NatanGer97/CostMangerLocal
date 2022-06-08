@@ -13,6 +13,8 @@ var costsRouter = require('./routes/costs');
 
 // mongoose setup
 const mongoose = require('mongoose')
+const connectionURI = 'mongodb+srv://Natan:Gershbein@costmanager.dshwg1z.mongodb.net/Project?authSource=admin&replicaSet=atlas-69xwrq-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true'
+// mongoose.connect(connectionURI);
 mongoose.connect('mongodb://localhost/CostMangerLocal');
 const db = mongoose.connection;
 db.on('error', function() {console.log("Error");});

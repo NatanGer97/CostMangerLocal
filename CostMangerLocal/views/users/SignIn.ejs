@@ -1,0 +1,15 @@
+<% layout('layouts/preLoginOut.ejs') %>
+<form class="row g-4" action="/login" method="post" >
+
+<div class="row">
+    <div class="col">
+      <input type="text" name="first_name" class="form-control" placeholder="First name" aria-label="First name">
+    </div>
+    <div class="col">
+      <input type="text" name="last_name" class="form-control" placeholder="Last name" aria-label="Last name">
+    </div>
+  </div>
+  
+  <button type="submit" class="btn btn-primary" >Login</button>
+
+  </form>

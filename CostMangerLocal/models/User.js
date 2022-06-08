@@ -8,6 +8,8 @@ const userSchema = new mongoose.Schema(
         birthday:{type:String,default:new Date().toLocaleDateString()},
         marital_status: String,
         _id: Number,
+        password: {type: String},
+        userName: {type: String},
         costs: []
     }
     

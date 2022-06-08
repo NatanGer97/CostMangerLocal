@@ -1,15 +1,18 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark " style="background-color:#0a2d79" ;>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark " style="background-color:#0a2d79;">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Cost Manager</a>
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
-    
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <div class="navbar-nav">
-        <a class="nav-link" href="/"><i class="bi bi-house"></i></a>
+    </button>    
+    <div class="collapse navbar-collapse " id="navbarNav">
+      
+      <ul class="navbar-nav ml-auto">
+        
+        <li class="nav-item">
+          <a class="nav-link" href="/"><i class="bi bi-house"></i></a>
+        </li>        
         <!-- Start of User section in nav-bar -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -38,6 +41,7 @@
             <li><a class="dropdown-item" href="#"></a></li>
           </ul>
         </li>
+
       <!-- End of Categories section in nav-bar -->
 
         <!-- Start of Categories section in nav-bar -->
@@ -55,8 +59,26 @@
          
           </ul>
         </li>
-      <!-- End of Categories section in nav-bar --> 
-      </div>
+      <!-- End of Costs section in nav-bar --> 
+    
+    </ul>
+ 
+ 
     </div>
+    <ul class="nav navbar-nav navbar-right ml-auto">
+      <li class="nav-item">
+        <a class="nav-link"href="/"><span class="glyphicon glyphicon-user"></span> Sign Out
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><span class="glyphicon glyphicon-log-in">
+
+        </span> Login
+      </a>
+    </li>
+    </ul>
   </div>
+  
+  
 </nav>
+

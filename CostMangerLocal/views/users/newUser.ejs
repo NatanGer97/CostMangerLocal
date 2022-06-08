@@ -1,13 +1,19 @@
-<% layout('layouts/skelton.ejs') %>
+<!-- <% layout('layouts/skelton.ejs') %> -->
+<% layout('layouts/preLoginOut.ejs') %>
     <title>New User</title>
-    <form class="row g-4" action="/users" method="post">
+
+    <form class="row g-4" action="/new" method="post" >
         <div class="col-md-4">
             <label for="fName" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="fName" name="first_name">
+            <input type="text" class="form-control" id="fName" name="first_name" required>
+            <div class="invalid-feedback">
+                Looks good!
+              </div>                
         </div>
+      
         <div class="col-md-4">
             <label for="lName" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="lName" name="last_name">
+            <input type="text" class="form-control" id="lName" name="last_name" required>
         </div>
         <div class="col-md-4">
             <label for="inputBirthday" class="form-label">birthday</label>
@@ -24,11 +30,24 @@
                 <option>Widowed</option>
             </select>
         </div>
+
+        <div class="col-md-4">
+            <label for="userEmail" class="form-label">Email - Username</label>
+            <input type="email" class="form-control" id="userEmail" placeholder="name@gmail.com" 
+            name="userName"  >
+        </div>
+        <div class="col-md-4">
+            <label for="userPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="userPassword" placeholder="password" 
+            name="password"  >
+        </div>
+
          <div class="col-md-4">
             <label for="userId" class="form-label">Id</label>
-            <input type="hidden" class="form-control" id="userId" value="<%= ++id %>" 
-            name="_id"  >
+            <input type="text" class="form-control" id="userId" value="<%= ++id %>" 
+            name="_id" readonly >
         </div>
+     
         <div class="col-12">
             <button type="submit" class="btn btn-primary" >Add</button>
         </div>
