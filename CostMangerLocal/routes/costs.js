@@ -16,18 +16,8 @@ router.get('/new',  async function (req, res, next) {
     const categories = await Category.find({});
     console.log(categories);
     res.render('costs/newCost.ejs',{'categories':categories});
-
-  /*   const costCategories = await Category.find({});   
-  res.render('costs/newCost.ejs',{'categories':costCategories}); */
 });
 
-/* router.get('/:id', async function (req, res, next) {
-  const user = await User.findById(req.params.id);
-  console.log(user);
-  res.render('users/showUser', { "user": user })
-
-
-}); */
 router.post('/',async function (req,res) {
     const newCost = new Cost(req.body);
     await newCost.save(function(error,newCostItem)
