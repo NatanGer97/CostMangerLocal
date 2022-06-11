@@ -10,7 +10,8 @@ const userSchema = new mongoose.Schema(
         _id: Number,
         password: {type: String},
         userName: {type: String},
-        costs: []
+        costs: [{type: mongoose.Schema.Types.ObjectId, ref: 'Cost'}]
+        // costs: []
     }
     
 );

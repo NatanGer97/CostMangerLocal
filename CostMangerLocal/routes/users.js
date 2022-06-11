@@ -84,9 +84,8 @@ router.get('/:id', async function (req, res, next) {
 });
 
 router.get('/:id/costs', async function (req, res, next) {
-  const user = await User.findById(req.params.id);
-  // res.send(new Date(user.costs[0].date.split('.')[2],user.costs[0].date.split('.')[1]+1,user.costs[0].date.split('.')[0]));  
-  // console.log(user);
+  const user = await User.findById(req.params.id).populate('costs');
+ 
   res.render('costs/allCosts', { "costs": user.costs, 'id': req.params.id});
 });
 
@@ -99,6 +98,7 @@ router.get('/:id/costs/new', async function (req, res, next) {
 
 });
 
+// rout for handling of new cost creation request
 router.post('/:id/costs', async function (req, res) {
   // res.send(req.body);
   const newCost = new Cost(req.body);
@@ -125,6 +125,7 @@ router.post('/:id/costs', async function (req, res) {
   const user = await User.findById(req.params.id);  
   user.costs.push(newCost);
   console.log(newCost); 
+  // res.send(user);
   await user.save();
   await newCost.save().then((newCost)=>{
      console.log(`created: ${newCost}`);
@@ -135,28 +136,32 @@ router.post('/:id/costs', async function (req, res) {
 
 });
 
-/* router.post('/clicked',function (req,res) 
-{
-  const click = {clickTime: new Date().toLocaleDateString()};
+// Deleting cost
+router.post('/:id/costs/:costId', async function (req,res) 
+{  
+  const costToDelete = await Cost.findById(req.params.costId);
+  const userToDeleteFrom = await User.findById(req.params.id);
+  console.log(userToDeleteFrom.costs[0]._id.toString());
+  console.log(req.params.costId.toString());
+  res.json(costToDelete);
 
-  const clicked_user =  new User({
-    first_name: "Avi",
-    last_name: "Levi",
-    birthday: new Date().toLocaleDateString(),
-    marital_status: "Married"
-});
-  console.log(click);
-  clicked_user.save(function (error) {
-    if(error)
-    {
-      console.log(error);
-    }
-    else
-    {
-      console.log(clicked_user);
-      res.sendStatus(201);}
-    });
+  // userToDeleteFrom.costs.forEach(cost => {
+  //   if (cost._id.toString() === req.params.costId.toString())
+  //   {
+      
+  //     res.send(i.toString());
+  //   }
+  // });
+  // for(let cost in userToDeleteFrom.costs)
+  // {
+  //   console.log(cost._id);
+  //   if (cost._id == req.params.costId.toString())
+  //   {
+  //     res.send('find');
+  //   }
+  // }
   
 });
- */
+
+
 module.exports = router;

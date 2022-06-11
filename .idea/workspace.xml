@@ -1,56 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba0a8c7d-e44d-4ccd-a395-746a264b7ba5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/CostMangerLocal/models/password.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CostMangerLocal/passwordHash.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CostMangerLocal/routes/ErrorObject.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/.vscode/settings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/bin/bcrypt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/bower.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/dist/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/dist/bcrypt.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/dist/bcrypt.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/dist/bcrypt.min.js.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/dist/bcrypt.min.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/externs/bcrypt.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/externs/minimal-env.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/scripts/build.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/src/bcrypt.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/src/bcrypt/impl.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/src/bcrypt/prng/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/src/bcrypt/prng/accum.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/src/bcrypt/prng/isaac.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/src/bcrypt/util.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/src/bcrypt/util/base64.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/src/bower.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/src/wrap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/tests/quickbrown.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bcryptjs/tests/suite.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seedData.js" afterDir="false" />
+    <list default="true" id="ba0a8c7d-e44d-4ccd-a395-746a264b7ba5" name="Changes" comment="with delete option but not work">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CostMangerLocal/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CostMangerLocal/models/Cost.js" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/models/Cost.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CostMangerLocal/routes/costs.js" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/routes/costs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CostMangerLocal/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/routes/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CostMangerLocal/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/routes/users.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CostMangerLocal/seedData.js" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/seedData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CostMangerLocal/views/Errors/userExist.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/views/Errors/errorPage.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CostMangerLocal/views/components/navbar.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/views/components/navbar.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CostMangerLocal/views/costs/allCosts.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/views/costs/allCosts.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CostMangerLocal/views/home.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/views/home.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CostMangerLocal/views/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/views/index.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CostMangerLocal/views/users/SignIn.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/views/users/SignIn.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CostMangerLocal/views/users/showUser.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/views/users/showUser.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +45,8 @@
       <workItem from="1654762350340" duration="474000" />
       <workItem from="1654763467072" duration="32000" />
       <workItem from="1654774529783" duration="188000" />
+      <workItem from="1654793780940" duration="543000" />
+      <workItem from="1654799822224" duration="196000" />
     </task>
     <servers />
   </component>
@@ -104,5 +63,10 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="with delete option but not work" />
+    <option name="LAST_COMMIT_MESSAGE" value="with delete option but not work" />
   </component>
 </project>

@@ -14,7 +14,8 @@ router.get('/', function (req, res, next) {
 
 router.get('/home', function (req, res, next) {
   if (CurrentLoggedInUser !== null) {
-    render('home.ejs', { user: CurrentLoggedInUser });
+    res.redirect(`/users/${CurrentLoggedInUser._id.toString()}`);
+    // render('home.ejs', { user: CurrentLoggedInUser });
   }
   else {
     // if there is connected user

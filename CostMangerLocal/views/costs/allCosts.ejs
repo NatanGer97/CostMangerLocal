@@ -4,36 +4,43 @@
 
     <div class="d-flex mb-3">
         <div class="me-auto p-2">
-            <a id="addBtn" type="button" class="btn btn-outline-dark btn-sm data-bs-toggle="tooltip" title="Back"
+            <a id="addBtn" type="button" class="btn btn-outline-dark btn-sm data-bs-toggle=" tooltip" title="Back"
                 href="/users/<%= id%> ">
                 <span class="bi bi-arrow-left"></span>
-            </a> 
+            </a>
         </div>
         <div class="p-2">
-            <a id="addBtn" type="button" class="btn btn-outline-primary btn-sm data-bs-toggle="tooltip" title="Add Cost"" href="/users/<%= id%>/costs/new">
+            <a id="addBtn" type="button" class="btn btn-outline-primary btn-sm data-bs-toggle=" tooltip"
+                title="Add Cost"" href=" /users/<%=id%>/costs/new">
                 <span class="bi bi-file-earmark-plus"></span>
             </a>
         </div>
         <div class="p-2">
-            <a id="addBtn" type="button" class="btn btn-outline-info btn-sm data-bs-toggle="tooltip" title="Get Report" href="#">
-                
-               <span class="bi bi-file-earmark-bar-graph"></span>
+            <a id="addBtn" type="button" class="btn btn-outline-info btn-sm data-bs-toggle=" tooltip" title="Get Report"
+                href="#">
+
+                <span class="bi bi-file-earmark-bar-graph"></span>
             </a>
-            
+
         </div>
 
     </div>
-
+<!-- 
 
     <table class="table table-striped table-hover">
 
         <thead class="table-light"">
             <tr>
-                <th scope="col">Description</th>
-                <th scope="col">Sum</th>
-                <th scope="col">Date <span style="font-size: x-small;">(yyyy-mm-dd)</span></th>
-                <th scope="col">Category</th>
-            </tr>
+                <th scope=" col">Description</th>
+            <th scope="col">Sum</th>
+            <th scope="col">Date <span style="font-size: x-small;">(yyyy-mm-dd)</span></th>
+            <th scope="col">Category</th>
+            <% if (costs.length> 0) { %>
+                <th scope="col">Delete</th>
+                <th scope="col">Show Cost</th>
+                <% } %>
+
+                    </tr>
         </thead>
         <tbody>
             <% for(let cost of costs) { %>
@@ -50,10 +57,56 @@
                     <td>
                         <%= cost.category%></a>
                     </td>
+                    <td>
+                        <form action="/users/<%= id %>/costs/<%= cost._id%>" method="post">
+                            <button id="buttonDelete" class="btn btn-outline-danger btn-sm bi bi-trash">
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <a type="button" href="/costs/<%= cost._id%>"
+                            class="btn btn-outline-info btn-sm bi bi-hand-index">
+                        </a>
+                    </td>
                 </tr>
                 <% } %>
         </tbody>
-    </table>
+    </table> -->
 
+    <div class="row row-cols-3  g-4">
+        <% for(let cost of costs) { %>
+            <div class="col">
+                <div class="card w-50">
+                    <div class="card-header">
+                        <h5><%= cost.description.toUpperCase() %></h5> 
+                    </div>
+                  <img src="/images/money.gif" class="card-img-top">
+                  <div class="card-body">
+                    <h5 class="card-text">                          
+                        <%= cost.sum%><small>&#8362;</small>
+                    </h5>
+                    
+                  </div>
+                  <div class="card-footer">
+                    <div class="d-flex justify-content-between">
+                        <a type="button" href="/costs/<%= cost._id%>"
+                            class="btn btn-outline-info btn-sm bi bi-hand-index">
+                        </a>
+                        <small class="text-muted"> <%= new Date(cost.date).toLocaleDateString() %> 
+                        </small>
+                        <form action="/users/<%= id %>/costs/<%= cost._id%>" method="post">
+                            <button id="buttonDelete" class="btn btn-outline-danger btn-sm bi bi-trash">
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- <small class="text-muted"> <%= new Date(cost.date).toLocaleDateString() %> 
+                    </small> -->
+                  </div>
+                </div>
+                
+              </div>
+            <% } %>
+   
 
     <!-- <script src="/javascripts/newUserClient.js"></script> -->

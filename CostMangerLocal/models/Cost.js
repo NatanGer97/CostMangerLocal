@@ -6,7 +6,8 @@ const costSchema = new mongoose.Schema(
         description: String,
         date:{type:String, default:new Date().toISOString()},
         /* category: {type: mongoose.Schema.Types.ObjectId, ref: 'Category'} */ // need to delete
-        category: {type: String, default: 'General'}
+        category: {type: String, default: 'General'},
+        user: {type:mongoose.Schema.Types.ObjectId, ref: 'User'}
         
     }
 );

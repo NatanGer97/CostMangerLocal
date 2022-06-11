@@ -11,6 +11,14 @@ router.get('/', async function (req, res, next) {
 
 });
 
+router.get('/:id', async function (req, res, next) {
+    const targetCostToShow = await Cost.findById(req.params.id);
+    // res.json({costToDelete});
+    // res.send(new Date(targetCostToShow.date).toLocaleDateString())
+    res.render('costs/showCost',{'cost':targetCostToShow});
+
+  
+  });
 
 router.get('/new',  async function (req, res, next) {
     const categories = await Category.find({});
