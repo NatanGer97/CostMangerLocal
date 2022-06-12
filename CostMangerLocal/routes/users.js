@@ -9,6 +9,9 @@ const { ErrorObject } = require('./ErrorObject');
 
 var router = express.Router();
 
+let CurrentLoggedInUser = null;
+
+
 /* GET users listing. */
 router.get('/', async function (req, res, next) {
   const users = await User.find({});
@@ -79,6 +82,7 @@ router.get('/:id', async function (req, res, next) {
 
   const user = await User.findById(req.params.id);
   console.log(user);
+  CurrentLoggedInUser = user;
   // res.render('users/showUser', { "user": user });
   res.render('home', { 'user': user });
 });
@@ -89,16 +93,18 @@ router.get('/:id/costs', async function (req, res, next) {
   res.render('costs/allCosts', { "costs": user.costs, 'id': req.params.id});
 });
 
+// rout for creating new cost
 router.get('/:id/costs/new', async function (req, res, next) {
   const categories = await Category.find({});
-  console.log(req.params);
-  const { id } = req.params.id;
+  const { id } = req.params.id;  // todo: check if this var is use else delete it unused var
+
+  console.log(req.params); // login for self testing need to be delete before submitting
 
   res.render('costs/newCost.ejs', { 'categories': categories, 'id': req.params.id });
 
 });
 
-// rout for handling of new cost creation request
+// rout for handling  new cost creation request
 router.post('/:id/costs', async function (req, res) {
   // res.send(req.body);
   const newCost = new Cost(req.body);
@@ -110,23 +116,20 @@ router.post('/:id/costs', async function (req, res) {
 
   }
   else {
-
-
     newCost['date'] = new Date(req.body.date).toISOString().split('T')[0];
     console.log(new Date(newCost['date']));
 
-
-  }
-  // console.log(newCost.date);
-  // res.send(newCost.date);
-  // res.send(newCost.date.toISOString().split('T')[0]);
-
+    }
 
   const user = await User.findById(req.params.id);  
-  user.costs.push(newCost);
+   
+  user.costs.push(newCost); // insert new cost to costs list of current logged in user..
   console.log(newCost); 
   // res.send(user);
+
   await user.save();
+  
+  // saving the new created cost 
   await newCost.save().then((newCost)=>{
      console.log(`created: ${newCost}`);
      res.redirect(`/users/${req.params.id}/costs`);
@@ -139,11 +142,13 @@ router.post('/:id/costs', async function (req, res) {
 // Deleting cost
 router.post('/:id/costs/:costId', async function (req,res) 
 {  
-  const costToDelete = await Cost.findById(req.params.costId);
-  const userToDeleteFrom = await User.findById(req.params.id);
-  console.log(userToDeleteFrom.costs[0]._id.toString());
-  console.log(req.params.costId.toString());
-  res.json(costToDelete);
+
+   
+  // const costToDelete = await Cost.findById(req.params.costId);
+  // const userToDeleteFrom = await User.findById(req.params.id);
+  // console.log(userToDeleteFrom.costs[0]._id.toString());
+  // console.log(req.params.costId.toString());
+  // res.json(costToDelete);
 
   // userToDeleteFrom.costs.forEach(cost => {
   //   if (cost._id.toString() === req.params.costId.toString())

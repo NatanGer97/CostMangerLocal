@@ -9,9 +9,11 @@ const userSchema = new mongoose.Schema(
         marital_status: String,
         _id: Number,
         password: {type: String},
-        userName: {type: String},
-        costs: [{type: mongoose.Schema.Types.ObjectId, ref: 'Cost'}]
-        // costs: []
+        userName: {type: String},        
+        // the model holds only the reference of cost items (only the id)
+        costs: [{type: mongoose.Schema.Types.ObjectId, ref: 'Cost'}] 
+        
+        
     }
     
 );

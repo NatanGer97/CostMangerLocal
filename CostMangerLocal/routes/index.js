@@ -6,7 +6,7 @@ const { ErrorObject } = require("./ErrorObject");
 
 let CurrentLoggedInUser = null;
 
-/* GET home page. */
+// rout for enter page (sign in or sign up)
 router.get('/', function (req, res, next) {
   res.render('index');
 });
@@ -55,26 +55,34 @@ router.post('/login', function (req, res, next) {
 });
 
 
-
+// rout for Sign-Up of new user page
 router.get('/new', async function (req, res, next) {
+
+  // retrieving the next id for new user
   const users = await User.find({}).sort({ _id: -1 });
+
+  // In there are no users (first user)
   if(users.length === 0)
   {
-    res.render('users/newUser.ejs', { 'id': 0 });  }
+    res.render('users/newUser.ejs', { 'id': 0 });  
+  }
 
-  // res.send(`${users[0]._id}`);
   res.render('users/newUser.ejs', { 'id': users[0]._id });
+
 });
 
+// rout for handling post request of Signing-Up new user page 
+// and saving in the DB
 router.post('/new', async function (req, res, next) {
   const newUser = new User(req.body);
 
-  // if the birthday is empty fill with today date
+  // if the birthday is empty, fill with today date
   if (req.body.birthday === '') {
+
+    //  splitting, in order to obtain only the date without the time part
     newUser['birthday'] = new Date().toISOString().split('T')[0];
   }
   else {
-    // localDateString - convert to local date format (dd.mm.yyyy)
     newUser['birthday'] = new Date(req.body.birthday).toISOString().split('T')[0];
   }
 

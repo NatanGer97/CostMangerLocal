@@ -11,20 +11,29 @@ router.get('/', async function (req, res, next) {
 
 });
 
-router.get('/:id', async function (req, res, next) {
-    const targetCostToShow = await Cost.findById(req.params.id);
-    // res.json({costToDelete});
-    // res.send(new Date(targetCostToShow.date).toLocaleDateString())
-    res.render('costs/showCost',{'cost':targetCostToShow});
+//$ need to be deleted $
+// router.get('/:id', async function (req, res, next) {
+//     const targetCostToShow = await Cost.findById(req.params.id);
+//     // res.json({costToDelete});
+//     // res.send(new Date(targetCostToShow.date).toLocaleDateString())
+//     res.render('costs/showCost',{'cost':targetCostToShow});
+//   });
+
+// rout for show page that display the specific cost related to current login user.
+  router.get('/:userId/:costId', async function (req, res, next) {
+
+    const targetCostToDisplay = await Cost.findById(req.params.costId);    
+    res.render('costs/showCost',{'cost': targetCostToDisplay, 'backLink': `/users/${req.params.userId}/costs`});
 
   
   });
 
-router.get('/new',  async function (req, res, next) {
-    const categories = await Category.find({});
-    console.log(categories);
-    res.render('costs/newCost.ejs',{'categories':categories});
-});
+// rout for creating new cost
+// router.get('/new',  async function (req, res, next) {
+//     const categories = await Category.find({});
+//     console.log(categories);
+//     res.render('costs/newCost.ejs',{'categories':categories});
+// });
 
 router.post('/',async function (req,res) {
     const newCost = new Cost(req.body);

@@ -2,43 +2,46 @@
     <title>
         <%= cost.description %>
     </title>
+    <a class="btn btn-outline-primary" href="<%= backLink %> ">
+        <i class="bi bi-arrow-left-circle"> Back</i>
+        
+         
+    </a>
     <div class="position-absolute top-50 start-50 translate-middle">
-        <div class="card text-bg-light mb-3 text-center" style="width: 18rem;">
-            <div class="card-header">
-                <h5><%= cost.description.toUpperCase() %></h5> 
-            </div>
-
-            <img src="/images/money.gif" class="card-img-top"  >
-            <div class="card-body">
-                <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                <ul class="list-group list-group-flush ">
-                    <li class="list-group-item">
-                        <!-- <i>Sum: </i> -->
-                        <span class="float-start">Sum:</span>
-                        <i>
-                            <%= cost.sum%><small>&#8362;</small>
-                        </i>
-                    </li>
-                    <li class="list-group-item">
-                        <!-- <i>Sum: </i> -->
-                        <span class="float-start">Category:</span>
-                        <i>
-                            <%= cost.category%>
-                        </i>
-                    </li>
-                    <li class="list-group-item">
-                        <!-- <i>Sum: </i> -->
-                        <a class="float-start btn btn-outline-danger btn bi bi-trash data-bs-toggle="tooltip" title="Delete""></a>
-                        <a class="float-end btn btn-outline-secondary btn align-middle data-bs-toggle="tooltip" title="Edit""><i class="bi bi-gear "></i></a>
-                    
-                    </li>
-
-
-                </ul>
-
-
-                <div id="costDateId" class="card-footer text-muted">
-                    <%= new Date(cost.date).toLocaleDateString() %> 
-                </div>
-            </div>
+        <div class="card text-bg-light mb-3 text-center" style="width: 18rem; margin-top: 10px;" ">
+        <div class="card-header">
+            <h5>
+                <%= cost.description.toUpperCase() %>
+            </h5>
         </div>
+
+        <img src="/images/money.gif" class="card-img-top">
+        <div class="card-body">
+
+            <ul class="list-group list-group-flush ">
+                <li class="list-group-item">
+                    <span class="float-start">Sum:</span>
+                    <i>
+                        <%= cost.sum%><small>&#8362;</small>
+                    </i>
+                </li>
+                <li class="list-group-item">
+                    <span class="float-start">Category:</span>
+                    <i>
+                        <%= cost.category%>
+                    </i>
+                </li>
+                <li class="list-group-item">
+                    <a class="float-start btn btn-outline-danger btn bi bi-trash data-bs-toggle=" tooltip"
+                        title="Delete""></a>
+                    <a class=" float-end btn btn-outline-secondary btn align-middle data-bs-toggle="tooltip" title="Edit"" href="/cost">
+                    <i class=" bi bi-gear "></i>
+                    </a>
+                </li>                
+            </ul>
+
+            <div id=" costDateId" class="card-footer text-muted">
+                        <%= new Date(cost.date).toLocaleDateString() %>
+        </div>
+    </div>
+    </div>
