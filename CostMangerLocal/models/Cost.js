@@ -7,7 +7,7 @@ const costSchema = new mongoose.Schema(
         date:{type:String, default:new Date().toISOString()},
         /* category: {type: mongoose.Schema.Types.ObjectId, ref: 'Category'} */ // need to delete
         category: {type: String, default: 'General'},
-        user: {type:mongoose.Schema.Types.ObjectId, ref: 'User'}
+        userId: {type: mongoose.Schema.Types.Number, ref: 'User', required: 'need to be assign to specif user'}
         
     }
 );

@@ -14,39 +14,40 @@ router.get('/', function (req, res, next) {
 
 router.get('/home', function (req, res, next) {
   if (CurrentLoggedInUser !== null) {
+    // save the current logged in user;
     res.redirect(`/users/${CurrentLoggedInUser._id.toString()}`);
-    // render('home.ejs', { user: CurrentLoggedInUser });
+
   }
   else {
-    // if there is connected user
-      let errorObject = new ErrorObject('You must login first','/login','Login');
-    res.render('Errors/errorPage', {errorObject})
-    // res.render('Errors/errorPage', { msg: "User not Exist", back: '/login',backButtonText:'Login' })
 
+    // if there is no connected user
+    let errorObject = new ErrorObject('You must login first', '/login', 'Login');
+    res.render('Errors/errorPage', { errorObject });
   }
-
-
 });
 
+// rout for login page
 router.get('/login', function (req, res, next) {
   res.render('users/SignIn.ejs');
 
 });
 
-
+// rout that handel the login post request
 router.post('/login', function (req, res, next) {
+
+  // checks if the given user name and password are match to some user in DB
   User.findOne({ 'userName': req.body.userName, 'password': req.body.password })
     .then((result) => {
+      // if match -> make the user as the logged in user and move to home page 
       if (result !== null) {
         CurrentLoggedInUser = result;
         console.log(CurrentLoggedInUser['_id']);
         res.redirect(`/users/${result._id.toString()}`);
-        // res.send(CurrentLoggedInUser._id.toString());
-        // res.render('home', { 'user': result });
+        
       }
       else {
-        let errorObject = new ErrorObject('User Not Exist Or you have enter wrong credentials',req.url);
-        res.render('Errors/errorPage', {errorObject})
+        let errorObject = new ErrorObject('User Not Exist Or you have enter wrong credentials', req.url);
+        res.render('Errors/errorPage', { errorObject })
         // res.render('Errors/errorPage', { msg: "User not Exist", back: req.url, backButtonText:'tr'})
       }
 
@@ -56,24 +57,24 @@ router.post('/login', function (req, res, next) {
 
 
 // rout for Sign-Up of new user page
-router.get('/new', async function (req, res, next) {
+router.get('/signUp', async function (req, res, next) {
 
   // retrieving the next id for new user
   const users = await User.find({}).sort({ _id: -1 });
+  console.log(users);
 
   // In there are no users (first user)
-  if(users.length === 0)
-  {
-    res.render('users/newUser.ejs', { 'id': 0 });  
+  if (users.length === 0) {
+    res.render('users/newUser.ejs', { 'id': 0 });
   }
 
-  res.render('users/newUser.ejs', { 'id': users[0]._id });
+  res.render('users/newUser.ejs', { 'id': ++users[0]._id });
 
 });
 
 // rout for handling post request of Signing-Up new user page 
 // and saving in the DB
-router.post('/new', async function (req, res, next) {
+router.post('/signUp', async function (req, res, next) {
   const newUser = new User(req.body);
 
   // if the birthday is empty, fill with today date
@@ -93,8 +94,10 @@ router.post('/new', async function (req, res, next) {
 
         newUser.save()
           .then((createdUser) => {
+            CurrentLoggedInUser = newUser;
             console.log(`newUser created: ${createdUser}`);
-            res.render('home', { user: newUser })
+            // res.render('home', { user: newUser })
+            res.redirect('home');
           })
           .catch((error) => {
             res.send(error); // need to be redirect to an error page and not just send the error;
@@ -103,17 +106,18 @@ router.post('/new', async function (req, res, next) {
         // res.redirect('home');
       }
       else {
-        let errorObject = new ErrorObject(`User  with the name: ${newUser.first_name} already exist`,req.url);
-        res.render('Errors/errorPage', {errorObject});
-        
-      //   res.render('Errors/errorPage', { msg: `User with the name: ${newUser.first_name} already exist`, back: req.url })
-       }
+        let errorObject = new ErrorObject(`User  with the name: ${newUser.first_name} already exist`, req.url);
+        res.render('Errors/errorPage', { errorObject });
+
+        //   res.render('Errors/errorPage', { msg: `User with the name: ${newUser.first_name} already exist`, back: req.url })
+      }
     })
     .catch((err) => res.send(`Error: ${err}`));
 });
 
 router.get('/signout', async function (req, res, next) {
-  loginUser = '';
+  loginUser = null;
+  
   res.redirect('/');
 });
 

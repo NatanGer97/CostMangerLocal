@@ -2,7 +2,7 @@
 <% layout('layouts/preLoginOut.ejs') %>
     <title>New User</title>
 
-    <form class="row g-4" action="/new" method="post" >
+    <form class="row g-4" action="/signUp" method="post" >
         <div class="col-md-4">
             <label for="fName" class="form-label">First Name</label>
             <input type="text" class="form-control" id="fName" name="first_name" required>
@@ -44,7 +44,7 @@
 
          <div class="col-md-4">
             <label for="userId" class="form-label">Id</label>
-            <input type="text" class="form-control" id="userId" value="<%= ++id %>" 
+            <input type="text" class="form-control" id="userId" value="<%= id %>" 
             name="_id" readonly >
         </div>
      

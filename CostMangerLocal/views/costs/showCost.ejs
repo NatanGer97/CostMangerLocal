@@ -4,12 +4,12 @@
     </title>
     <a class="btn btn-outline-primary" href="<%= backLink %> ">
         <i class="bi bi-arrow-left-circle"> Back</i>
-        
-         
+
+
     </a>
     <div class="position-absolute top-50 start-50 translate-middle">
         <div class="card text-bg-light mb-3 text-center" style="width: 18rem; margin-top: 10px;" ">
-        <div class="card-header">
+        <div class=" card-header">
             <h5>
                 <%= cost.description.toUpperCase() %>
             </h5>
@@ -32,16 +32,15 @@
                     </i>
                 </li>
                 <li class="list-group-item">
-                    <a class="float-start btn btn-outline-danger btn bi bi-trash data-bs-toggle=" tooltip"
-                        title="Delete""></a>
-                    <a class=" float-end btn btn-outline-secondary btn align-middle data-bs-toggle="tooltip" title="Edit"" href="/cost">
-                    <i class=" bi bi-gear "></i>
-                    </a>
-                </li>                
+                    <form class="float-center" action="/users/<%= id %>/costs/<%= cost._id%>" method="post">
+                        <button id="buttonDelete" class="btn btn-outline-danger btn-sm bi bi-trash">
+                        </button>
+                    </form>
+                </li>
             </ul>
 
             <div id=" costDateId" class="card-footer text-muted">
-                        <%= new Date(cost.date).toLocaleDateString() %>
+                <%= new Date(cost.date).toLocaleDateString() %>
+            </div>
         </div>
-    </div>
     </div>

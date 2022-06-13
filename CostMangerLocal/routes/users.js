@@ -1,9 +1,7 @@
 var express = require('express');
 const User = require('../models/User');
 const Category = require('../models/Category');
-const mongoose = require('mongoose');
 const Cost = require('../models/Cost');
-const { render } = require('ejs');
 const { ErrorObject } = require('./ErrorObject');
 
 
@@ -12,12 +10,12 @@ var router = express.Router();
 let CurrentLoggedInUser = null;
 
 
-/* GET users listing. */
-router.get('/', async function (req, res, next) {
-  const users = await User.find({});
-  res.render('users/showAll', { "users": users })
+// /* GET users . */
+// router.get('/', async function (req, res, next) {
+//   const users = await User.find({});
+//   res.render('users/showAll', { "users": users })
 
-});
+// });
 
 
 /* router.get('/test', async function (req, res) {
@@ -40,7 +38,7 @@ router.get('/', async function (req, res, next) {
 
 
 
-router.post('/', async function (req, res) {
+/* router.post('/', async function (req, res) {
   const newUser = new User(req.body);
 
   // for debugging propose
@@ -65,7 +63,7 @@ router.post('/', async function (req, res) {
   }
   else {
     const errObj = new ErrorObject()
-    res.render('Errors/userExist', );
+    res.render('Errors/userExist',);
   }
   //  console.log(`newUser${newUser}`);
 
@@ -77,7 +75,9 @@ router.post('/', async function (req, res) {
   //   });
 
 });
+ */
 
+// localHose/userid
 router.get('/:id', async function (req, res, next) {
 
   const user = await User.findById(req.params.id);
@@ -87,11 +87,14 @@ router.get('/:id', async function (req, res, next) {
   res.render('home', { 'user': user });
 });
 
+// rout that get all the costs of the user (by userId)
 router.get('/:id/costs', async function (req, res, next) {
   const user = await User.findById(req.params.id).populate('costs');
- 
-  res.render('costs/allCosts', { "costs": user.costs, 'id': req.params.id});
+
+  res.render('costs/allCosts', { "costs": user.costs, 'id': req.params.id });
 });
+
+
 
 // rout for creating new cost
 router.get('/:id/costs/new', async function (req, res, next) {
@@ -119,53 +122,52 @@ router.post('/:id/costs', async function (req, res) {
     newCost['date'] = new Date(req.body.date).toISOString().split('T')[0];
     console.log(new Date(newCost['date']));
 
-    }
+  }
 
-  const user = await User.findById(req.params.id);  
-   
+  const user = await User.findById(req.params.id);
+
   user.costs.push(newCost); // insert new cost to costs list of current logged in user..
-  console.log(newCost); 
+  newCost.userId = req.params.id;;
+  console.log(newCost);
+
+
   // res.send(user);
 
   await user.save();
-  
+
   // saving the new created cost 
-  await newCost.save().then((newCost)=>{
-     console.log(`created: ${newCost}`);
-     res.redirect(`/users/${req.params.id}/costs`);
-   }).catch((error)=> {
-     console.log(error);
-   });
+  await newCost.save().then((newCost) => {
+    console.log(`created: ${newCost}`);
+    res.redirect(`/users/${req.params.id}/costs`);
+  }).catch((error) => {
+    console.log(error);
+  });
 
 });
 
 // Deleting cost
-router.post('/:id/costs/:costId', async function (req,res) 
-{  
+router.post('/:id/costs/:costId', async function (req, res) {
+  // find the cost which user ask to delete
 
-   
-  // const costToDelete = await Cost.findById(req.params.costId);
-  // const userToDeleteFrom = await User.findById(req.params.id);
-  // console.log(userToDeleteFrom.costs[0]._id.toString());
-  // console.log(req.params.costId.toString());
-  // res.json(costToDelete);
+  // find all costs related to current user.
+  let userCosts = await User.findOne({ _id: req.params.id }).select(['costs']);
 
-  // userToDeleteFrom.costs.forEach(cost => {
-  //   if (cost._id.toString() === req.params.costId.toString())
-  //   {
-      
-  //     res.send(i.toString());
-  //   }
-  // });
-  // for(let cost in userToDeleteFrom.costs)
-  // {
-  //   console.log(cost._id);
-  //   if (cost._id == req.params.costId.toString())
-  //   {
-  //     res.send('find');
-  //   }
-  // }
+  // filters user costs in order to get only the cost that is not need to be deleted
+  userCosts = userCosts['costs'].filter(cost => cost._id.toString() !== req.params.costId.toString());
+  console.log(userCosts);
+
+  await User.findOneAndUpdate(req.params.id, { 'costs': userCosts })
+    .then(function () {
+      // delete the desired cost and redirect back to All Cost page
+      Cost.deleteOne({ _id: req.params.costId }).then((deleteResults) => { console.log(`Deleted succeeded`); }).catch((error) => console.log(`Error: ${error}`));
+
+      res.redirect(`/users/${req.params.id}/costs`);
+    })
+    .catch(function (error) {
+      res.send(error);
+    });
   
+    // res.send(userWithUpdatedCosts);
 });
 
 
