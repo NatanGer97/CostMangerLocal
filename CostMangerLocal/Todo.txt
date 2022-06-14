@@ -1,0 +1,14 @@
+1. create new schema (model) for Report 
+   (it means create a model that would represents the report collection in the DB)
+
+2. create a get rout which would show the desire report by specific year & month
+    the rout should contain a query string parameters representing the desire month & year according them report will generated (localhost/port/users/userid/costs?month=5&year=2022);
+
+3. the hadler function of this get request will find all cost according userId, filter them and keep
+   only the fitting costs  that was "created" in this month and year
+
+4. after fitting costs were found, need to sum all theirs sums to a Total sum of all cost in specific 
+    month & year and then build new report that will contains all the fitting costs and the total sum.
+
+5. Implement the computed design pattern 
+
