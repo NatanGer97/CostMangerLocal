@@ -1,0 +1,31 @@
+<% layout('layouts/skelton.ejs') %>
+<title><%= cost.description %> </title>
+<form class="row g-4" action="/costs/<%= id %>/<%= cost.id%>" method="post">
+    <div class="col-md-4">
+        <label for="sum" class="form-label">Sum</label>
+        <input type="text"  class="form-control" id="sum" name="sum" value="<%= cost.sum %> " >
+    </div>
+    <div class="col-md-4">
+        <label for="description" class="form-label">Description</label>
+        <input type="text"  class="form-control" id="description" name="description" value="<%= cost.description %> ">
+    </div>
+    <div class="col-md-4">
+        <label for="Status" class="form-label">Category</label>
+        <select id="Category" class="form-select" name="category">
+            <option selected><%= cost.category %> </option>
+
+            <% categories.forEach(category => { %>
+                <option><%= category.name %> </option>
+            <% }) %>
+            
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label for="inputDate" class="form-label">Current Date <small>- cant be modify</small></label>
+        <input type="text" class="form-control" id="inputDate"  value="<%= cost.date.toString() %>" readonly>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+</form>

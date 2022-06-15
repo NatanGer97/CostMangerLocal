@@ -77,7 +77,6 @@ let CurrentLoggedInUser = null;
 });
  */
 
-// localHose/userid
 router.get('/:id', async function (req, res, next) {
 
   const user = await User.findById(req.params.id);
@@ -92,6 +91,27 @@ router.get('/:id/costs', async function (req, res, next) {
   const user = await User.findById(req.params.id).populate('costs');
 
   res.render('costs/allCosts', { "costs": user.costs, 'id': req.params.id });
+  
+});
+
+// for postman
+router.get('/:id/allCosts', async function (req, res, next) {
+  // const user = await User.findById(req.params.id).populate('costs');
+  const costs = await Cost.find({userId: req.params.id});
+  const fittingCosts = costs.filter(cost =>  cost.date.split('-')[1] === req.query.month.toString());
+  console.log(fittingCosts);
+
+  // res.send( costs[0].date.split('-')[1] === '06');
+  res.send(fittingCosts);
+  
+});
+
+// only from postman
+router.get('/:id/report', async function (req, res, next) {
+  const costs = await Cost.find({userId: req.params.id});
+  res.send(costs);
+
+
 });
 
 
@@ -167,7 +187,6 @@ router.post('/:id/costs/:costId', async function (req, res) {
       res.send(error);
     });
   
-    // res.send(userWithUpdatedCosts);
 });
 
 

@@ -33,6 +33,7 @@ router.get('/login', function (req, res, next) {
 });
 
 // rout that handel the login post request
+//login
 router.post('/login', function (req, res, next) {
 
   // checks if the given user name and password are match to some user in DB
@@ -57,6 +58,7 @@ router.post('/login', function (req, res, next) {
 
 
 // rout for Sign-Up of new user page
+
 router.get('/signUp', async function (req, res, next) {
 
   // retrieving the next id for new user

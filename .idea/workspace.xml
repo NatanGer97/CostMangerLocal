@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba0a8c7d-e44d-4ccd-a395-746a264b7ba5" name="Changes" comment="with delete option but not work">
-      <change beforePath="$PROJECT_DIR$/CostMangerLocal/models/Cost.js" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/models/Cost.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CostMangerLocal/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/routes/users.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CostMangerLocal/views/components/navbar.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/views/components/navbar.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-    </list>
+    <list default="true" id="ba0a8c7d-e44d-4ccd-a395-746a264b7ba5" name="Changes" comment="with delete option but not work" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,6 +42,7 @@
       <workItem from="1654799822224" duration="196000" />
       <workItem from="1654964529080" duration="205000" />
       <workItem from="1655107666651" duration="126000" />
+      <workItem from="1655154088679" duration="767000" />
     </task>
     <servers />
   </component>
