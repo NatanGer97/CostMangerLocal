@@ -16,11 +16,14 @@
         </a>
     </div>
     <div class="p-2">
-        <a id="addBtn" type="button" class="btn btn-outline-info btn data-bs-toggle=" tooltip" title="Get Report"
-        href="#">
-
+        
+        <form action="/report/<%= id %>/getReport" method="get">
+            <button  class="btn btn-outline-info bi bi-file-earmark-bar-graph" name="userId" value="<%= id %>"></button>
+        </form>
+        <!-- <a id="addBtn" type="button" class="btn btn-outline-info btn data-bs-toggle=" tooltip" title="Get Report"
+        href="/report/getReport/">
         <span class="bi bi-file-earmark-bar-graph"></span>
-        </a>
+        </a> -->
 
     </div>
 

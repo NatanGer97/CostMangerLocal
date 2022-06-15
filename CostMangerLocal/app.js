@@ -12,6 +12,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var categoriesRouter = require('./routes/categories');
 var costsRouter = require('./routes/costs');
+var reportRouter = require('./routes/report');
 
 // mongoose setup
 const connectionURI = 'mongodb+srv://Natan:Gershbein@costmanager.dshwg1z.mongodb.net/Project'
@@ -42,6 +43,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/categories', categoriesRouter);
 app.use('/costs', costsRouter);
+app.use('/report', reportRouter);
 
 
 app.engine('ejs', ejsMate);
