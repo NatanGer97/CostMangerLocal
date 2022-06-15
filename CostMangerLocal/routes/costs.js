@@ -5,6 +5,9 @@ const Cost = require('../models/Cost');
 
 var router = express.Router();
 
+// Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn’t support it.
+
+
 
 // rout for  page that display the specific cost related to current login user.
 router.get('/:userId/:costId', async function (req, res, next) {
@@ -29,13 +32,15 @@ router.get('/:userId/:costId', async function (req, res, next) {
 router.get("/:userId/:costId/edit", async function (req, res) {
   const targetCostToUpdated = await Cost.findById(req.params.costId);
   const categories = await Category.find({});
-  
-  res.render("costs/editCost",{id: req.params.userId, cost: targetCostToUpdated,
-  categories: categories});
+
+  res.render("costs/editCost", {
+    id: req.params.userId, cost: targetCostToUpdated,
+    categories: categories
+  });
 
 });
 
-router.post('/:userId/:costId', async function (req, res) {
+router.put('/:userId/:costId', async function (req, res) {
   try {
     const targetCostToUpdated = await Cost.findByIdAndUpdate(req.params.costId, req.body);
 

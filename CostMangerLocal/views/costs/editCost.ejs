@@ -1,6 +1,6 @@
 <% layout('layouts/skelton.ejs') %>
 <title><%= cost.description %> </title>
-<form class="row g-4" action="/costs/<%= id %>/<%= cost.id%>" method="post">
+<form class="row g-4" action="/costs/<%= id %>/<%= cost.id%>?_method=PUT" method="post">
     <div class="col-md-4">
         <label for="sum" class="form-label">Sum</label>
         <input type="text"  class="form-control" id="sum" name="sum" value="<%= cost.sum %> " >
