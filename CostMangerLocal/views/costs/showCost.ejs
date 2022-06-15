@@ -15,9 +15,8 @@
                 </h5>
             </div>
 
-            <img src="/images/money.gif" class="card-img-top">
             <div class="card-body">
-
+                <img src="/images/money.gif" class="card-img-top">
                 <ul class="list-group list-group-flush ">
                     <li class="list-group-item">
                         <span class="float-start">Sum:</span>
@@ -32,12 +31,13 @@
                         </i>
                     </li>
                     <li class="list-group-item">
-                        <form class="float-end" action="/users/<%= id %>/costs/<%= cost._id%>" method="post">
+                        <form class="float-end" action="/users/<%= id %>/costs/<%= cost._id%>?_method=delete"
+                            method="post">
                             <button id="buttonDelete" class="btn btn-outline-danger btn bi bi-trash">
                             </button>
                         </form>
                         <form action="/costs/<%=id%>/<%= cost._id%>/edit" method="get">
-                            <button class="btn btn-outline-secondary btn bi bi-gear-fill float-start" ></button>
+                            <button class="btn btn-outline-secondary btn bi bi-gear-fill float-start"></button>
                         </form>
 
                     </li>

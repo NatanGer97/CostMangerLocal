@@ -88,27 +88,34 @@ router.get('/:id', async function (req, res, next) {
 
 // rout that get all the costs of the user (by userId)
 router.get('/:id/costs', async function (req, res, next) {
-  const user = await User.findById(req.params.id).populate('costs');
+  // const user = await User.findById(req.params.id,'cost').sort({'category': 1}).populate('costs');
+  try {
+    const costs = await Cost.find({ userId: Number(req.params.id) }).sort({ category: 'asc' });
 
-  res.render('costs/allCosts', { "costs": user.costs, 'id': req.params.id });
-  
+    res.render('costs/allCosts', { "costs": costs, 'id': req.params.id });
+  }
+  catch (error) {
+    res.send(error);
+  }
+  // res.render('costs/allCosts', { "costs": user.costs, 'id': req.params.id });
+
 });
 
 // for postman
 router.get('/:id/allCosts', async function (req, res, next) {
   // const user = await User.findById(req.params.id).populate('costs');
-  const costs = await Cost.find({userId: req.params.id});
-  const fittingCosts = costs.filter(cost =>  cost.date.split('-')[1] === req.query.month.toString());
+  const costs = await Cost.find({ userId: req.params.id });
+  const fittingCosts = costs.filter(cost => cost.date.split('-')[1] === req.query.month.toString());
   console.log(fittingCosts);
 
   // res.send( costs[0].date.split('-')[1] === '06');
   res.send(fittingCosts);
-  
+
 });
 
 // only from postman
 router.get('/:id/report', async function (req, res, next) {
-  const costs = await Cost.find({userId: req.params.id});
+  const costs = await Cost.find({ userId: req.params.id });
   res.send(costs);
 
 
@@ -166,7 +173,7 @@ router.post('/:id/costs', async function (req, res) {
 });
 
 // Deleting cost
-router.post('/:id/costs/:costId', async function (req, res) {
+router.delete('/:id/costs/:costId', async function (req, res) {
   // find the cost which user ask to delete
 
   // find all costs related to current user.
@@ -179,14 +186,18 @@ router.post('/:id/costs/:costId', async function (req, res) {
   await User.findOneAndUpdate(req.params.id, { 'costs': userCosts })
     .then(function () {
       // delete the desired cost and redirect back to All Cost page
-      Cost.deleteOne({ _id: req.params.costId }).then((deleteResults) => { console.log(`Deleted succeeded`); }).catch((error) => console.log(`Error: ${error}`));
+      Cost.deleteOne({ _id: req.params.costId })
+      .then((deleteResults) => { 
+        console.log(`Deleted succeeded`); 
+        res.redirect(`/users/${req.params.id}/costs`);
+    }).catch((error) => console.log(`Error: ${error}`));
 
-      res.redirect(`/users/${req.params.id}/costs`);
+
     })
     .catch(function (error) {
       res.send(error);
     });
-  
+
 });
 
 

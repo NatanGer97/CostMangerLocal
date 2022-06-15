@@ -7,8 +7,8 @@ var router = express.Router();
 /* get  all categories. */
 router.get('/all', async function (req, res, next) {
     const allCategories = await Category.find({});
-    // res.render('Categories/allCategories.ejs',{"categories":allCategories});
-    res.send(allCategories);
+    res.render('Categories/allCategories.ejs',{"categories":allCategories});
+    // res.send(allCategories);
 });
 
 /* rout for page which handles creation new category */

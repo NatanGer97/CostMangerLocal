@@ -1,28 +1,30 @@
 <% layout('layouts/skelton.ejs') %>
-<title>New Cost</title>
-<form class="row g-4" action="/users/<%= id %>/costs" method="post">
-    <div class="col-md-4">
-        <label for="sum" class="form-label">Sum</label>
-        <input type="number" step="0.1" class="form-control" id="sum" name="sum">
-    </div>
-    <div class="col-md-4">
-        <label for="description" class="form-label">Description</label>
-        <input type="text"  class="form-control" id="description" name="description">
-    </div>
-    <div class="col-md-4">
-        <label for="Status" class="form-label">Category</label>
-        <select id="Category" class="form-select" name="category">
-            <option selected>General</option>
-            <% for( let category of categories ) { %>
-                <option><%= category.name %> </option>
-            <% } %>
-        </select>
-    </div>
-    <div class="col-md-4">
-        <label for="inputDate" class="form-label">Date</label>
-        <input type="date" class="form-control" id="inputDate" name="date" >
-    </div>
-    <div class="col-12">
-        <button type="submit" class="btn btn-primary" >Add</button>
-    </div>
-</form>
+    <title>New Cost</title>
+    <form class="row g-4" action="/users/<%= id %>/costs" method="post">
+        <div class="col-md-4">
+            <label for="sum" class="form-label">Sum</label>
+            <input type="number" step="0.1" class="form-control" id="sum" name="sum" value="0">
+        </div>
+        <div class="col-md-4">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="description" name="description" required>
+        </div>
+        <div class="col-md-4">
+            <label for="Status" class="form-label">Category</label>
+            <select id="Category" class="form-select" name="category">
+                <option selected>General</option>
+                <% for( let category of categories ) { %>
+                    <option>
+                        <%= category.name %>
+                    </option>
+                    <% } %>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="inputDate" class="form-label">Date</label>
+            <input type="date" class="form-control" id="inputDate" name="date">
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>

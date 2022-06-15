@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const costSchema = new mongoose.Schema(
     {
-        sum: Number,
+        sum: {type: Number, default:0},
         description: String,
         date:{type:String, default:new Date().toISOString()},
         /* category: {type: mongoose.Schema.Types.ObjectId, ref: 'Category'} */ // need to delete

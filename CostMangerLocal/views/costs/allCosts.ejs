@@ -78,13 +78,27 @@
         <div class="col" style="margin-bottom: 10px;">
             <div class="card w-50">
                 <div class="card-header">
-                    <h5><%= cost.description.toUpperCase() %></h5>
+                    <!-- <h5><%= cost.description.toUpperCase() %></h5> -->
+                    <%= cost.description.toUpperCase() %>
+                                    
                 </div>
-                <img src="/images/money.gif" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-text">
-                        <%= cost.sum%><small>&#8362;</small>
-                    </h5>
+                    <img src="/images/money.gif" class="card-img-top">
+                    <div class="card-body">
+                        <div class="float-start">
+                        <h5 class="card-text">
+                            <span>
+                               <%= cost.sum%><small>&#8362;</small>                            
+                            </span>
+                        </h5>
+                    </div>
+                    <div class="float-end">
+                        <small>
+                            <%= cost.category %> 
+                           </small>
+                    </div>
+                </div>
+               
 
                 </div>
                 <div class="card-footer">
@@ -97,7 +111,7 @@
                         </a> -->
                         <small class="text-muted"> <%= new Date(cost.date).toLocaleDateString() %>
                         </small>
-                        <form action="/users/<%= id %>/costs/<%= cost._id%>" method="post">
+                        <form action="/users/<%= id %>/costs/<%= cost._id%>?_method=delete" method="post">
                             <button id="buttonDelete" class="btn btn-outline-danger btn-sm bi bi-trash">
                             </button>
                         </form>

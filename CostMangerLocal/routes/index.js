@@ -66,7 +66,7 @@ router.post('/login', async function (req, res, next) {
   else {
     let errorObject = new ErrorObject('User Not Exist Or you have enter wrong credentials', req.url);
     res.render('Errors/errorPage', { errorObject })
-    
+
     // res.render('Errors/errorPage', { msg: "User not Exist", back: req.url, backButtonText:'tr'})
   }
   
@@ -154,7 +154,7 @@ router.post('/signUp', async function (req, res, next) {
 });
 
 router.get('/signout', async function (req, res, next) {
-  loginUser = null;
+  CurrentLoggedInUser = null;
   
   res.redirect('/');
 });
