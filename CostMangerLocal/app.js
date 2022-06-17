@@ -16,11 +16,15 @@ var reportRouter = require('./routes/report');
 
 // mongoose setup
 const connectionURI = 'mongodb+srv://Natan:Gershbein@costmanager.dshwg1z.mongodb.net/Project'
-// const connectionURI = 'mongodb+srv://Natan:Gershbein@costmanager.dshwg1z.mongodb.net/Project?authSource=admin&replicaSet=atlas-69xwrq-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true'
+
 const mongoose = require('mongoose')
+
 mongoose.connect(connectionURI);
+
 const db = mongoose.connection;
+
 db.on('error', function() {console.log("Error");});
+
 db.once('open',()=>{console.log("DB Connected");});
 // mongoose.connect('mongodb://localhost/CostMangerLocal');
 
