@@ -3,6 +3,7 @@ const User = require('../models/User');
 const Category = require('../models/Category');
 const Cost = require('../models/Cost');
 const { ErrorObject } = require('./ErrorObject');
+const e = require('express');
 
 
 var router = express.Router();
@@ -103,32 +104,32 @@ router.get('/:id/costs', async function (req, res, next) {
 
 // rout for creating new cost
 router.get('/:id/costs/new', async function (req, res, next) {
-  
+
   const categories = await Category.find({});
-  
+
   res.render('costs/newCost.ejs', { 'categories': categories, 'id': req.params.id });
 
 });
 
 // rout for handling  new cost creation request
 router.post('/:id/costs', async function (req, res) {
-  
+
   const newCost = new Cost(req.body);
 
-  newCost['date'] = req.body.date === "" ?  
-  newCost['date'] = new Date().toISOString().split('T')[0] : 
-  newCost['date'] = new Date(req.body.date).toISOString().split('T')[0];
+  newCost['date'] = req.body.date === "" ?
+    newCost['date'] = new Date().toISOString().split('T')[0] :
+    newCost['date'] = new Date(req.body.date).toISOString().split('T')[0];
 
 
   // if the date is empty fill  today date
-/*   if (req.body.date === "") {
-    newCost['date'] = new Date().toISOString().split('T')[0];
-
-  }
-  else {
-    newCost['date'] = new Date(req.body.date).toISOString().split('T')[0];
-
-  } */
+  /*   if (req.body.date === "") {
+      newCost['date'] = new Date().toISOString().split('T')[0];
+  
+    }
+    else {
+      newCost['date'] = new Date(req.body.date).toISOString().split('T')[0];
+  
+    } */
 
   const user = await User.findById(req.params.id);
 
@@ -153,27 +154,34 @@ router.delete('/:id/costs/:costId', async function (req, res) {
   // find the cost which user ask to delete
 
   // find all costs related to current user.
-  let userCosts = await User.findOne({ _id: req.params.id }).select(['costs']);
+  try {
+    const costToDelete = await Cost.findOneAndDelete({ _id: req.params.costId });
+    // successfully delete -> the return value is null or empty if there is no cost with geven id to delete
+    if (costToDelete !== null) {
+      console.log("Delete cost: " + costToDelete);
 
-  // filters user costs in order to get only the cost that is not need to be deleted
-  userCosts = userCosts['costs'].filter(cost => cost._id.toString() !== req.params.costId.toString());
-  console.log(userCosts);
+      Cost.find({ userId: req.params.id }, function (err, fittingCosts) {
+        if (err) {
+          res.send("Error: " + err);
+        }
+        else {
+          User.findByIdAndUpdate(req.params.id, { "costs": fittingCosts }, function (err, result) {
+            if (err) {
+              res.send(err);
+            }
+            else {
+              console.log("Updated user costs: " + fittingCosts);
+              res.redirect(`/users/${req.params.id}/costs`);
+            }
 
-  await User.findOneAndUpdate(req.params.id, { 'costs': userCosts })
-    .then(function () {
-      // delete the desired cost and redirect back to All Cost page
-      Cost.deleteOne({ _id: req.params.costId })
-      .then((deleteResults) => { 
-        console.log(`Deleted succeeded`); 
-        res.redirect(`/users/${req.params.id}/costs`);
-    }).catch((error) => console.log(`Error: ${error}`));
-
-
-    })
-    .catch(function (error) {
-      res.send(error);
-    });
-
+          });
+        }
+      });
+    }
+  }
+  catch (err) {
+    res.send("Error: " + err);
+  }
 });
 
 
