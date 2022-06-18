@@ -82,7 +82,6 @@ router.get('/:id', async function (req, res, next) {
   const user = await User.findById(req.params.id);
   console.log(user);
   CurrentLoggedInUser = user;
-  // res.render('users/showUser', { "user": user });
   res.render('home', { 'user': user });
 });
 
@@ -90,6 +89,7 @@ router.get('/:id', async function (req, res, next) {
 router.get('/:id/costs', async function (req, res, next) {
   // const user = await User.findById(req.params.id,'cost').sort({'category': 1}).populate('costs');
   try {
+
     const costs = await Cost.find({ userId: Number(req.params.id) }).sort({ category: 'asc' });
 
     res.render('costs/allCosts', { "costs": costs, 'id': req.params.id });
@@ -101,64 +101,40 @@ router.get('/:id/costs', async function (req, res, next) {
 
 });
 
-// for postman
-router.get('/:id/allCosts', async function (req, res, next) {
-  // const user = await User.findById(req.params.id).populate('costs');
-  const costs = await Cost.find({ userId: req.params.id });
-  const fittingCosts = costs.filter(cost => cost.date.split('-')[1] === req.query.month.toString());
-  console.log(fittingCosts);
-
-  // res.send( costs[0].date.split('-')[1] === '06');
-  res.send(fittingCosts);
-
-});
-
-// only from postman
-router.get('/:id/report', async function (req, res, next) {
-  const costs = await Cost.find({ userId: req.params.id });
-  res.send(costs);
-
-
-});
-
-
-
 // rout for creating new cost
 router.get('/:id/costs/new', async function (req, res, next) {
+  
   const categories = await Category.find({});
-  const { id } = req.params.id;  // todo: check if this var is use else delete it unused var
-
-  console.log(req.params); // login for self testing need to be delete before submitting
-
+  
   res.render('costs/newCost.ejs', { 'categories': categories, 'id': req.params.id });
 
 });
 
 // rout for handling  new cost creation request
 router.post('/:id/costs', async function (req, res) {
-  // res.send(req.body);
+  
   const newCost = new Cost(req.body);
 
+  newCost['date'] = req.body.date === "" ?  
+  newCost['date'] = new Date().toISOString().split('T')[0] : 
+  newCost['date'] = new Date(req.body.date).toISOString().split('T')[0];
+
+
   // if the date is empty fill  today date
-  if (req.body.date === "") {
+/*   if (req.body.date === "") {
     newCost['date'] = new Date().toISOString().split('T')[0];
-    console.log(new Date(newCost['date']));
 
   }
   else {
     newCost['date'] = new Date(req.body.date).toISOString().split('T')[0];
-    console.log(new Date(newCost['date']));
 
-  }
+  } */
 
   const user = await User.findById(req.params.id);
 
   user.costs.push(newCost); // insert new cost to costs list of current logged in user..
   newCost.userId = req.params.id;;
   console.log(newCost);
-
-
-  // res.send(user);
 
   await user.save();
 
