@@ -2,12 +2,7 @@ var express = require('express');
 const Category = require('../models/Category');
 const Cost = require('../models/Cost');
 
-
 var router = express.Router();
-
-// Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn’t support it.
-
-
 
 // rout for  page that display the specific cost related to current login user.
 router.get('/:userId/:costId', async function (req, res, next) {
@@ -26,7 +21,6 @@ router.get('/:userId/:costId', async function (req, res, next) {
     res.send("Error accrued:" + err);
   }
 
-
 });
 
 router.get("/:userId/:costId/edit", async function (req, res) {
@@ -42,7 +36,8 @@ router.get("/:userId/:costId/edit", async function (req, res) {
 
 router.put('/:userId/:costId', async function (req, res) {
   try {
-    const targetCostToUpdated = await Cost.findByIdAndUpdate(req.params.costId, req.body);
+    const updatedCost =  req.body;
+    const targetCostToUpdated = await Cost.findByIdAndUpdate(req.params.costId, updatedCost);
 
     if (targetCostToUpdated == null) {
       res.send("error did not find cost with given id");
@@ -52,8 +47,6 @@ router.put('/:userId/:costId', async function (req, res) {
       res.redirect(`/costs/${req.params.userId.toString()}/${req.params.costId.toString()}`);
 
     }
-
-
   }
   catch (err) {
     res.send("error: " + err);

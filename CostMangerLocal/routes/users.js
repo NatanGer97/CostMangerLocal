@@ -116,6 +116,7 @@ router.post('/:id/costs', async function (req, res) {
 
   const newCost = new Cost(req.body);
 
+  // if the date is empty fill  today date
   newCost['date'] = req.body.date === "" ?
     newCost['date'] = new Date().toISOString().split('T')[0] :
     newCost['date'] = new Date(req.body.date).toISOString().split('T')[0];
@@ -135,17 +136,28 @@ router.post('/:id/costs', async function (req, res) {
 
   user.costs.push(newCost); // insert new cost to costs list of current logged in user..
   newCost.userId = req.params.id;;
-  console.log(newCost);
+  // console.log(`newCost was created: ` + newCost);
 
+  // similar to update
   await user.save();
 
-  // saving the new created cost 
-  await newCost.save().then((newCost) => {
+  // saving new cost 
+  newCost.save().then(newCost => {
+    console.log(`newCost was created: ` + newCost);
+    res.redirect(`/users/${req.params.id}/costs`);
+
+  }).catch((error) => {
+    console.log(error);
+    res.send("Error" + error);
+  });
+
+
+  /* await newCost.save().then((newCost) => {
     console.log(`created: ${newCost}`);
     res.redirect(`/users/${req.params.id}/costs`);
   }).catch((error) => {
     console.log(error);
-  });
+  }); */
 
 });
 
