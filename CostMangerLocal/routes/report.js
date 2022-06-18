@@ -7,7 +7,7 @@ var router = express.Router();
 router.get('/:userId/getReport', function (req, res) {
     res.render('report/getReport', { userId: req.params.userId });
 
-});
+}); 
 
 router.get('/:userId/newReport', async function (req, res) {
     const fullDate = req.query.date;

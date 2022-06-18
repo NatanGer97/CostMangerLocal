@@ -114,6 +114,7 @@ router.get('/signUp', async function (req, res, next) {
 // rout for handling post request of Signing-Up new user page 
 // and saving in the DB
 router.post('/signUp', async function (req, res, next) {
+  
   const newUser = new User(req.body);
 
   // if the birthday is empty, fill with today date
