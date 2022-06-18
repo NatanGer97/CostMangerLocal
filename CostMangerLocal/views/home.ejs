@@ -6,68 +6,83 @@
     <h3 class="display-4">Hi <%= user.first_name %> &#128075; &#128075;</h3>
     <hr class="my-4">
     <p></p>
-    <p class="lead">
-    <div class="accordion" id="accordionExample">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-            data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-            Info
-          </button>
-        </h2>
-        <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne"
-          data-bs-parent="#accordionExample">
-          <div class="accordion-body">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">User Id</th>
-                  <th scope="col">Full Name</th>
-                  <th scope="col">Birthday</th>
-                  <th scope="col">Martial Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">
-                    <%= user._id%>
-                  </th>
-                  <td>
-                    <%= user.first_name + " " + user.last_name %>
-                  </td>
-                  <td>
-                    <%= user.birthday%>
-                  </td>
-                  <td>
-                    <%= user.marital_status%>
-                  </td>
-                </tr>
 
-              </tbody>
-            </table>
+    <p class="lead" id="actions"">
+    <div class=" accordion" id="accordionExample" style="visibility: hidden;">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+          aria-expanded="false" aria-controls="collapseOne">
+          Info
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne"
+        data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">User Id</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Birthday</th>
+                <th scope="col">Martial Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">
+                  <%= user._id%>
+                </th>
+                <td>
+                  <%= user.first_name + " " + user.last_name %>
+                </td>
+                <td>
+                  <%= user.birthday%>
+                </td>
+                <td>
+                  <%= user.marital_status%>
+                </td>
+              </tr>
 
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseOne">
-            Actions
-          </button>
-        </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse " aria-labelledby="headingOne"
-          data-bs-parent="#accordionExample">
-          <div class="accordion-body">
-            <p btn class="lead">
-              <a class="btn btn-primary btn-sm" href="/users/<%= user._id%>/costs/" role="button">My Costs</a>
-              <a class="btn btn-primary btn-sm" href="/users/<%= user._id%>/costs/new" role="button">Add Costs</a>
-              <a class="btn btn-primary btn-sm" href="/report/<%= user._id%>/getReport" role="button">Get Report</a>
-            </p>  
+            </tbody>
+          </table>
 
-          </div>
         </div>
       </div>
     </div>
-    </p>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+          aria-expanded="false" aria-controls="collapseOne">
+          Actions
+        </button>
+      </h2>
+      <div id="collapseTwo" class="accordion-collapse collapse " aria-labelledby="headingOne"
+        data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <p btn class="lead">
+            <a class="btn btn-primary btn-sm" href="/users/<%= user._id%>/costs/" role="button">My Costs</a>
+            <a class="btn btn-primary btn-sm" href="/users/<%= user._id%>/costs/new" role="button">Add Costs</a>
+            <a class="btn btn-primary btn-sm" href="/report/<%= user._id%>/getReport" role="button">Get Report</a>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
+  </p>
+  <div class="d-flex justify-content-center" id="spinner">
+    <div class="spinner-border" role="status" aria-hidden="true">
+
+    </div>
+
+
+  </div>
+  <script>
+    setInterval(() => {
+      document.getElementById('spinner').style.visibility = "hidden"
+      show();
+    }, 4000);
+    function show() {
+      setInterval(() => document.getElementById('accordionExample').style.visibility = "visible", 500);
+    }
+  </script>

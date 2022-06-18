@@ -1,34 +1,31 @@
 <% layout('layouts/skelton.ejs') %>
-<title>Costs</title>
-<h2 class="text-center">All Costs</h2>
+    <title>Costs</title>
+    <h2 class="text-center">All Costs</h2>
 
-<div class="d-flex mb-3">
-    <div class="me-auto p-2">
-        <a id="addBtn" type="button" class="btn btn-outline-dark btn data-bs-toggle=" tooltip" title="Back"
-        href="/users/<%= id%> ">
-        <span class="bi bi-arrow-left"></span>
-        </a>
-    </div>
-    <div class="p-2">
-        <a id="addBtn" type="button" class="btn btn-outline-primary btn data-bs-toggle=" tooltip"
-        title="Add Cost"" href=" /users/<%=id%>/costs/new">
-        <span class="bi bi-file-earmark-plus"></span>
-        </a>
-    </div>
-    <div class="p-2">
-        
-        <form action="/report/<%= id %>/getReport" method="get">
-            <button  class="btn btn-outline-info bi bi-file-earmark-bar-graph" name="userId" value="<%= id %>"></button>
-        </form>
-        <!-- <a id="addBtn" type="button" class="btn btn-outline-info btn data-bs-toggle=" tooltip" title="Get Report"
-        href="/report/getReport/">
-        <span class="bi bi-file-earmark-bar-graph"></span>
-        </a> -->
+    <div class="d-flex mb-3">
+        <div class="me-auto p-2">
+            <a id="addBtn" type="button" class="btn btn-outline-dark btn data-bs-toggle=" tooltip" title="Back"
+                href="/users/<%= id%> ">
+                <span class="bi bi-arrow-left"></span>
+            </a>
+        </div>
+        <div class="p-2">
+            <a id="addBtn" type="button" class="btn btn-outline-primary btn data-bs-toggle=" tooltip"
+                title="Add Cost"" href=" /users/<%=id%>/costs/new">
+                <span class="bi bi-file-earmark-plus"></span>
+            </a>
+        </div>
+        <div class="p-2">
+
+            <form action="/report/<%= id %>/getReport" method="get">
+                <button class="btn btn-outline-info bi bi-file-earmark-bar-graph" name="userId"
+                    value="<%= id %>"></button>
+            </form>
+
+        </div>
 
     </div>
-
-</div>
-<!-- 
+    <!-- 
 
     <table class="table table-striped table-hover">
 
@@ -75,58 +72,72 @@
                 <% } %>
         </tbody>
     </table> -->
+    <div class="text-center" id="spinner">
+        <div class="spinner-border" role="status" aria-hidden="true">
+        </div>
+        <div class="row row-cols-3  g-4 text-center" id="costContent" style="visibility:hidden ;">
+            <% for(let cost of costs) { %>
+                <div class="col" style="margin-bottom: 10px;">
+                    <div class="card w-50">
+                        <div class="card-header">
+                            <!-- <h5><%= cost.description.toUpperCase() %></h5> -->
+                            <%= cost.description.toUpperCase() %>
 
-<div class="row row-cols-3  g-4">
-    <% for(let cost of costs) { %>
-        <div class="col" style="margin-bottom: 10px;">
-            <div class="card w-50">
-                <div class="card-header">
-                    <!-- <h5><%= cost.description.toUpperCase() %></h5> -->
-                    <%= cost.description.toUpperCase() %>
-                                    
-                </div>
-                <div class="card-body">
-                    <img src="/images/money.gif" class="card-img-top">
-                    <div class="card-body">
-                        <div class="float-start">
-                        <h5 class="card-text">
-                            <span>
-                               <%= cost.sum%><small>&#8362;</small>                            
-                            </span>
-                        </h5>
-                    </div>
-                    <div class="float-end">
-                        <small>
-                            <%= cost.category %> 
-                           </small>
-                    </div>
-                </div>
-               
+                        </div>
+                        <div class="card-body">
+                            <img src="/images/money.gif" class="card-img-top">
+                            <div class="card-body">
+                                <div class="float-start">
+                                    <h5 class="card-text">
+                                        <span>
+                                            <%= cost.sum%><small>&#8362;</small>
+                                        </span>
+                                    </h5>
+                                </div>
+                                <div class="float-end">
+                                    <small>
+                                        <%= cost.category %>
+                                    </small>
+                                </div>
+                            </div>
 
-                </div>
-                <div class="card-footer">
-                    <div class="d-flex justify-content-between">
-                        <a type="button" href="/costs/<%=id %>/<%= cost._id%>"
-                           class="btn btn-outline-info btn-sm bi bi-hand-index">
-                        </a>
-                         <!-- <a type="button" href="/costs/<%= cost._id%>"
+
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-between">
+                                <a type="button" href="/costs/<%=id %>/<%= cost._id%>"
+                                    class="btn btn-outline-info btn-sm bi bi-hand-index">
+                                </a>
+                                <!-- <a type="button" href="/costs/<%= cost._id%>"
                            class="btn btn-outline-info btn-sm bi bi-hand-index">
                         </a> -->
-                        <small class="text-muted"> <%= new Date(cost.date).toLocaleDateString() %>
-                        </small>
-                        <form action="/users/<%= id %>/costs/<%= cost._id%>?_method=delete" method="post">
-                            <button id="buttonDelete" class="btn btn-outline-danger btn-sm bi bi-trash">
-                            </button>
-                        </form>
+                                <small class="text-muted">
+                                    <%= new Date(cost.date).toLocaleDateString() %>
+                                </small>
+                                <form action="/users/<%= id %>/costs/<%= cost._id%>?_method=delete" method="post">
+                                    <button id="buttonDelete" class="btn btn-outline-danger btn-sm bi bi-trash">
+                                    </button>
+                                </form>
+                            </div>
+
+                            <!-- <small class="text-muted"> <%= new Date(cost.date).toLocaleDateString() %> 
+                    </small> -->
+                        </div>
                     </div>
 
-                    <!-- <small class="text-muted"> <%= new Date(cost.date).toLocaleDateString() %> 
-                    </small> -->
                 </div>
-            </div>
-
+                <% } %>
         </div>
-    <% } %>
+
+        <script>
+            setInterval(() => {
+                document.getElementById('spinner').style.visibility = "hidden"
+                show();
+            }, 2000);
+            function show() {
+                setInterval(() => document.getElementById('costContent').style.visibility = "visible", 1000);
+            }
+        </script>
 
 
-    <!-- <script src="/javascripts/newUserClient.js"></script> -->
+        <!-- <script src="/javascripts/newUserClient.js"></script> -->

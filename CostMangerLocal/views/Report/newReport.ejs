@@ -1,34 +1,47 @@
 <% layout('layouts/skelton.ejs') %>
-<title>Get Report</title>
-<div class="container">
-  <title>Report</title>
-  <div class="display-6" style="text-align:  center;"><%= reportTitle %></div>
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">description</th>
-            <th scope="col">Category</th>
-            <th scope="col">Date</th>            
-            <th scope="col">sum</th>            
-          </tr>
-        </thead>
+  <title>Get Report</title>
+  <div class="container">
+    <title>Report</title>
 
-        <tbody>
-          <% costs.forEach(cost => { %>
-            <tr>
-              <th scope="row"></th>
-              <td><%= cost.description %> </td>
-              <td><%= cost.category %> </td>
-              <td><%= cost.date %> </td>
-              <td><%= cost.sum %> </td>
-            </tr>
+    <div class="display-6" style="text-align:  center;">
+      <%= reportTitle %>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">description</th>
+          <th scope="col">Category</th>
+          <th scope="col">Date</th>
+          <th scope="col">sum</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% costs.forEach(cost=> { %>
+          <tr>
+            <th scope="row"></th>
+            <td>
+              <%= cost.description %>
+            </td>
+            <td>
+              <%= cost.category %>
+            </td>
+            <td>
+              <%= cost.date %>
+            </td>
+            <td>
+              <%= cost.sum %>
+            </td>
+          </tr>
           <% }) %>
 
-        </tbody>
-        
-        <th>total: <%= totalSum %> </th>
+      </tbody>
 
-      </table>
- 
-</div>
+      <th>total: <%= totalSum %>
+      </th>
+
+    </table>
+    <div id="actions"></div>
+
+  </div>
