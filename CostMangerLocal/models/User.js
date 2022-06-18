@@ -11,7 +11,8 @@ const userSchema = new mongoose.Schema(
         password: {type: String},
         userName: {type: String},        
         // the model holds only the reference of cost items (only the id)
-        costs: [{type: mongoose.Schema.Types.ObjectId, ref: 'Cost'}] 
+        costs: [{type: mongoose.Schema.Types.ObjectId, ref: 'Cost'}],
+           
         
         
     }
