@@ -14,34 +14,46 @@ router.get('/:userId/newReport', async function (req, res) {
     const reportDate = new Date(fullDate).toUTCString();
     const costs = await Cost.find({userId:req.params.userId});
     const yearAndMonth = fullDate.split("-");
-   
+
+
     console.log(yearAndMonth);
     
     const year = yearAndMonth[0];
     const month = yearAndMonth[1];
     
-    const costsArray = costs.filter(cost => 
-        cost.date.split("-")[1] === month && cost.date.split("-")[0] === year 
-    );
-    
-    let sum = 0;
+    Report.find({userId: req.params.userId, date_created : fullDate}, function(err, report){
+        if (err)
+        {
+            res.send(err);
+        }
+        console.log(report);
+        res.json(report);
+    }); 
 
-    costsArray.forEach((cost) => sum += cost.sum);
-    console.log(sum);
+
+    // const costsArray = costs.filter(cost => 
+    //     cost.date.split("-")[1] === month && cost.date.split("-")[0] === year 
+    // );
+    
+    // let sum = 0;
+
+    // costsArray.forEach((cost) => sum += cost.sum);
+    // console.log(sum);
 
     
-    const generateNewReport = new Report({
-        userId : req.params.userId,
-        costs: costsArray,
-        totalSum : sum
-    });
+    // const generateNewReport = new Report({
+    //     userId : req.params.userId,
+    //     costs: costsArray,
+    //     totalSum : sum,
+    //     date_created : new Date(fullDate).toISOString().split('-').slice(0,2).join('-'),
+    // });
     
-    await generateNewReport.save();
+    // await generateNewReport.save();
 
 
     // splitting date in  wed, 14 Jun 2022 07:00:00 GMT form to have only Jun, 2022 via Regex
-    const dateInArrFormat = reportDate.split(/\W+/gm).slice(2, 4)
-    const reportTitle = (`Report for: ${dateInArrFormat[0]}, ${dateInArrFormat[1]}`);
+    // const dateInArrFormat = reportDate.split(/\W+/gm).slice(2, 4)
+    // const reportTitle = (`Report for: ${dateInArrFormat[0]}, ${dateInArrFormat[1]}`);
 
     // const user = await User.findById(req.params.id).populate('costs');
    /*  const costs = await Cost.find({ userId: req.params.userId });
@@ -60,11 +72,13 @@ router.get('/:userId/newReport', async function (req, res) {
     
     console.log(totalSumInThisMonth); */
 
-    /* for self testing */
+    /* for self testing 
     // console.log(reportDate.split(/\W+/gm).slice(2,4));    
+    */
 
-    res.render('report/newReport', 
-    { 'reportTitle': reportTitle, 'costs': costsArray, 'totalSum' : sum});
+
+    // res.render('report/newReport', 
+    // { 'reportTitle': reportTitle, 'costs': costsArray, 'totalSum' : sum});
 
 });
 

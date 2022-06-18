@@ -6,7 +6,8 @@ const reportSchema = new mongoose.Schema(
         userId : {type:mongoose.Schema.Types.Number, ref:'User'},
         costs : [{type: mongoose.Schema.Types.ObjectId, ref: 'Cost'}],
         totalSum: {type:Number, default:0}, 
-        }
+        
+    }
     
 );
 
