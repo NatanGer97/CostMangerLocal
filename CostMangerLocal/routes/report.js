@@ -5,7 +5,6 @@ const Cost = require('../models/Cost');
 var router = express.Router();
 
 router.get('/:userId/getReport', function (req, res) {
-    // res.send(req.params.userId);
     res.render('report/getReport', { userId: req.params.userId });
 
 });
