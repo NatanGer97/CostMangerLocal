@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const ejsMate = require('ejs-mate');
-var methodOverride = require('method-override')
+var methodOverride = require('method-override');
 
 
 

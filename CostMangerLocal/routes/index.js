@@ -1,4 +1,5 @@
 var express = require('express');
+const session = require('express-session');
 var router = express.Router();
 const User = require('../models/User');
 const { ErrorObject } = require("./ErrorObject");
@@ -22,11 +23,17 @@ utilsFunctions.LoginValidation = async function (userName, password) {
 
 
 
+
 // rout for enter page (sign in or sign up)
 router.get('/', function (req, res, next) {
   res.render('index');
 });
 
+router.get('/credits', function (req, res)
+ {  
+    res.render('credits');
+
+ });
 
 router.get('/home', function (req, res, next) {
 
@@ -61,7 +68,6 @@ router.post('/login', async function (req, res, next) {
 
   // if its not null  -> user with given details was found
   if (LoginValidationResults !== null) {
-
     CurrentLoggedInUser = LoginValidationResults;
 
     console.log(CurrentLoggedInUser['_id']);

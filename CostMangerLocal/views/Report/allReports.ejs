@@ -1,0 +1,32 @@
+<% layout('layouts/skelton.ejs') %>
+<div class="d-flex mb-3">
+    <div class="me-auto p-2">
+        <a id="addBtn" type="button" class="btn btn-outline-dark btn data-bs-toggle=" tooltip" title="Back"
+            href="/users/<%= userId %> ">
+            <span class="bi bi-arrow-left"></span>
+        </a>
+    </div>
+   
+    <div class="p-2">
+
+        <form action="/report/<%= userId %>/getReport" method="get">
+            <button class="btn btn-outline-info bi bi-file-earmark-bar-graph" name="userId"
+                value="<%= userId %>"></button>
+        </form>
+
+    </div>
+
+</div>
+
+<div class="row ">
+    <% reports.forEach(report => { %>
+        <div class="col-sm-6">
+            <div class="card" style="background-image: url('/images/report.gif'); background-repeat: no-repeat; background-size: 10%; background-position: right; ">
+              <div class="card-body">
+                <h5 class="card-title"><%= report.title.split(':')[1] %> </h5>
+                <p class="card-text"><%= report.totalSum %><small> &#8362;</small> </p>
+              </div>
+            </div>
+          </div>
+    <% }) %>    
+  </div>

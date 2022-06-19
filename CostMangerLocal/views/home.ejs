@@ -3,7 +3,11 @@
   <title>Cost Manager</title>
 
   <div class="jumbotron">
-    <h3 class="display-4">Hi <%= user.first_name %> &#128075; &#128075;</h3>
+           <h3 class="display-4">
+            Hi <%= user.first_name %> &#128075; &#128075;
+          </h3>
+
+
     <hr class="my-4">
     <p></p>
 
@@ -64,6 +68,7 @@
             <a class="btn btn-primary btn-sm" href="/users/<%= user._id%>/costs/" role="button">My Costs</a>
             <a class="btn btn-primary btn-sm" href="/users/<%= user._id%>/costs/new" role="button">Add Costs</a>
             <a class="btn btn-primary btn-sm" href="/report/<%= user._id%>/getReport" role="button">Get Report</a>
+            <a class="btn btn-primary btn-sm" href="/report/<%= user._id%>/allReports" role="button">All Reports</a>
           </p>
         </div>
       </div>
@@ -81,8 +86,8 @@
     setInterval(() => {
       document.getElementById('spinner').style.visibility = "hidden"
       show();
-    }, 2000);
+    }, 500);
     function show() {
-      setInterval(() => document.getElementById('accordionExample').style.visibility = "visible", 500);
+      setInterval(() => document.getElementById('accordionExample').style.visibility = "visible", 400);
     }
   </script>
