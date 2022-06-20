@@ -19,16 +19,37 @@
             </a>
         </div>
         <div class="p-2">
-            <form action="/costs/<%= id %>/sortByCategory">
-                <button  type="submit" class="btn btn-outline-primary btn" data-bs-toggle=" tooltip"
-                    title="Sort by category">
-                    <span class="bi bi-funnel"></span>
-                </button>
-            </form>
-          <!--   <a id="addBtn" type="button" class="btn btn-outline-primary btn" data-bs-toggle=" tooltip" title="Sort by category"
-                href="costs/<%= id %>/allCosts/">
-                <span class="bi bi-funnel">2</span>
-            </a> -->
+            <button class="btn btn-outline-primary btn bi bi-funnel" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"></button>
+
+            <div class="offcanvas offcanvas-end"data-bs-scroll="true" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel"
+                style="background-color:#e8edf1;">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title text-center" id="offcanvasTopLabel">
+                        What filter to apply?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <form class="text-center m-5" action="/costs/<%= id %>/sort">
+                        <button type="submit" name="sortBy" value="category" class="btn btn-outline-primary btn"
+                            data-bs-toggle=" offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"
+                            title="Sort by category">
+                            <i class="bi bi-tag"> <span>By Category</span></i>
+                        </button>
+                    </form>
+
+                    <form class="text-center" action="/costs/<%= id %>/sort" method="get">
+                        <button type="submit" name="sortBy" value="price" class="btn btn-outline-primary btn"
+                            data-bs-toggle=" offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"
+                            title="Sort by Price">
+                            <i class="bi bi-cash"><span> By Price</span></i>
+                        </button>
+                    </form>
+
+
+                </div>
+            </div>
+
         </div>
         <div class="p-2">
 

@@ -23,12 +23,21 @@ router.get('/:userId/', async function (req, res, next) {
 });
 
 
-// rout for get all cost of current use sorted by categories
-router.get('/:userId/sortByCategory', async function (req, res, next) {
+// rout for get all cost of current usr sorted by user choice( price or category)
+router.get('/:userId/sort', async function (req, res) {
+  let costs = [];
+
   try {
-    // return all user costs sort by category field
-    const costs = await Cost.find({userId: req.params.userId}).sort({ category: 'asc' });
-    console.log(costs);
+      
+    if(req.query.sortBy === 'category')
+    {
+       costs = await Cost.find({userId: req.params.userId}).sort({category: 'asc'});
+    }
+    if(req.query.sortBy === 'price')
+    {
+       costs = await Cost.find({userId: req.params.userId}).sort({sum: 'asc'});
+    }
+  
     res.render('costs/allCosts', { 'costs': costs, 'id': req.params.userId });
   }
   catch (error) {
@@ -36,6 +45,7 @@ router.get('/:userId/sortByCategory', async function (req, res, next) {
     res.send(`Error: ${error}`);
   }
 });
+
 
 
 // rout for handling  new cost creation request
