@@ -44,10 +44,8 @@ router.get('/:userId/allReports', async function (req, res) {
 });
 
 
-
 router.get('/:userId/getReport', function (req, res) {
     res.render('report/getReport', { userId: req.params.userId });
-
 });
 
 router.get('/:userId/newReport', async function (req, res) {
@@ -56,27 +54,22 @@ router.get('/:userId/newReport', async function (req, res) {
     const reportDate = new Date(fullDate).toUTCString();
     const costs = await Cost.find({ userId: req.params.userId });
     const yearAndMonth = fullDate.split("-");
-    /*         console.log(yearAndMonth);
-     */
     const year = yearAndMonth[0];
     const month = yearAndMonth[1];
 
     const reportTitle = reportUtilsFunctions.createReportTitle(reportDate);
-    
+
     // user costs that fitting to desire costs
     const costsArray = reportUtilsFunctions.findFittingCost(costs, month, year);
     let sum = 0;
-
     try {
 
         const report = await Report.find({ userId: req.params.userId, date_created: fullDate });
-
-        console.log(report);
         // case : creating new report
         if (report.length === 0) {
+
             const totalSum = reportUtilsFunctions.calcTotalSumOfReport(costsArray);
             sum = totalSum;
-
 
             const generateNewReport = new Report({
                 userId: req.params.userId,
@@ -99,39 +92,24 @@ router.get('/:userId/newReport', async function (req, res) {
 
             if (report[0].costs.length !== costsArray.length) {
                 console.log("updating existing report");
-                
+
                 const totalSum = reportUtilsFunctions.calcTotalSumOfReport(costsArray);
                 sum = totalSum;
 
-                await Report.findByIdAndUpdate(report[0]._id, { totalSum: totalSum, costs: costsArray });
-                
-                res.render('report/newReport',
-                {
-                    'reportTitle': reportTitle,
-                    'costs': costsArray, 'totalSum': totalSum
-                });
-
+                await Report.findByIdAndUpdate(report[0]._id, { totalSum: totalSum, costs: costsArray });              
             } else {
                 console.log("giving previous report");
-               
             }
-
         }
-        
         res.render('report/newReport',
-        {
-            'reportTitle': reportTitle,
-            'costs': costsArray, 'totalSum': sum === 0 ? report[0].totalSum : sum
-        });
-     
-
+            {
+                'reportTitle': reportTitle,
+                'costs': costsArray, 'totalSum': sum === 0 ? report[0].totalSum : sum
+            });
 
     } catch (err) {
         console.log(err + "error");
     }
-
-
-
 });
 
 router.get('/:userId/:reportId', async function (req, res) {
@@ -146,13 +124,7 @@ router.get('/:userId/:reportId', async function (req, res) {
     } catch (error) {
         console.log("Error: " + error);
         res.send("Error: " + error);
-
     }
 });
 
 module.exports = router;
-
-
-
-
-

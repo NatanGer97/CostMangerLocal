@@ -5,7 +5,6 @@ const User = require('../models/User');
 const { ErrorObject } = require("./ErrorObject");
 
 let CurrentLoggedInUser = null;
-
 let utilsFunctions = {};
 
 /**
@@ -21,9 +20,6 @@ utilsFunctions.LoginValidation = async function (userName, password) {
   }
 }
 
-
-
-
 // rout for enter page (sign in or sign up)
 router.get('/', function (req, res, next) {
   res.render('index');
@@ -32,7 +28,6 @@ router.get('/', function (req, res, next) {
 router.get('/credits', function (req, res)
  {  
     res.render('credits');
-
  });
 
 router.get('/home', function (req, res, next) {
@@ -40,7 +35,6 @@ router.get('/home', function (req, res, next) {
   if (CurrentLoggedInUser !== null) {
 
     res.redirect(`/users/${CurrentLoggedInUser._id.toString()}`);
-
   }
   else {
 
@@ -52,7 +46,6 @@ router.get('/home', function (req, res, next) {
 
 // rout for retrieve login page
 router.get('/login', function (req, res, next) {
-
   res.render('users/SignIn.ejs');
 });
 
@@ -64,7 +57,6 @@ router.post('/login', async function (req, res, next) {
 
   // checks if the given username and password are match to some user in DB
   const LoginValidationResults = await utilsFunctions.LoginValidation(req.body.userName, req.body.password);
-  // const LoginValidationResults = await LoginValidation(req.body.userName, req.body.password);
 
   // if its not null  -> user with given details was found
   if (LoginValidationResults !== null) {
@@ -73,32 +65,24 @@ router.post('/login', async function (req, res, next) {
     console.log(CurrentLoggedInUser['_id']);
 
     res.redirect(`/users/${LoginValidationResults._id.toString()}`);
-
   } // else -> show  error page with err info
   else {
     let errorObject = new ErrorObject('User Not Exist Or you have enter wrong credentials', req.url);
-    res.render('Errors/errorPage', { errorObject })
-
-    // res.render('Errors/errorPage', { msg: "User not Exist", back: req.url, backButtonText:'tr'})
+    res.render('Errors/errorPage', { errorObject });
   }
-
 });
-
 
 // rout for Sign-Up of new user page
 router.get('/signUp', async function (req, res, next) {
 
   // retrieving the next id for new user
   const users = await User.find({}).sort({ _id: -1 });
-  console.log(users);
 
   // In there are no users (first user)
   if (users.length === 0) {
     res.render('users/newUser.ejs', { 'id': 0 });
   }
-
   res.render('users/newUser.ejs', { 'id': ++users[0]._id });
-
 });
 
 // rout for handling post request of Signing-Up new user page 
@@ -115,7 +99,8 @@ router.post('/signUp', async function (req, res, next) {
       let userBirthday = req.body.birthday;
 
       newUser.birthday = userBirthday === '' ?
-        new Date().toISOString().split('T')[0] : new Date(userBirthday).toISOString().split('T')[0];
+        new Date().toISOString().split('T')[0] : 
+        new Date(userBirthday).toISOString().split('T')[0];
 
       newUser.save().then((createdUser) => {
 
@@ -125,29 +110,22 @@ router.post('/signUp', async function (req, res, next) {
         res.redirect('home');
 
       }).catch((error) => {
-        res.send(fittingUserToUserName + " error"); // need to be redirect to an error page and not just send the error;
+        res.send(fittingUserToUserName + " error"); 
       });
     }
     else // in case user with given username already exist
     {
       let errorObject = new ErrorObject(`User  with the username: ${req.body.userName} already exist`, req.url);
-
       res.render('Errors/errorPage', { errorObject });
     }
-
-
   }
   catch (err) { res.send(err + " err"); }
-
-
 });
 
 router.get('/signout', async function (req, res, next) {
 
   CurrentLoggedInUser = null;
   res.redirect('/');
-
 });
-
 
 module.exports = router;

@@ -5,12 +5,10 @@ const costSchema = new mongoose.Schema(
         sum: {type: Number, default:0},
         description: String,
         date:{type:String, default:new Date().toISOString()},
-        /* category: {type: mongoose.Schema.Types.ObjectId, ref: 'Category'} */ // need to delete
         category: {type: String, default: 'General'},
-        userId: {type: mongoose.Schema.Types.Number, ref: 'User', required: 'need to be assign to specif user'}
-        
-    }
-);
+        userId: {type: mongoose.Schema.Types.Number, 
+            ref: 'User', required: 'need to be assign to specif user'}        
+    });
 
 const Cost = mongoose.model("Cost",costSchema);
 
