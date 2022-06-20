@@ -1,10 +1,6 @@
-const { render } = require('ejs');
 const express = require('express');
-const Category = require('../models/Category');
 const Cost = require('../models/Cost');
 const Report = require('../models/Report');
-
-
 const router = express.Router();
 
 let reportUtilsFunctions = {};
@@ -14,7 +10,7 @@ reportUtilsFunctions.createReportTitle = function (reportDate) {
 
     // splitting date in  wed, 14 Jun 2022 07:00:00 GMT form to have only Jun, 2022 via Regex
     const dateInArrFormat = reportDate.split(/\W+/gm).slice(2, 4);
-    return (`Report for: ${dateInArrFormat[0]}, ${dateInArrFormat[1]}`);
+    return `Report for: ${dateInArrFormat[0]}, ${dateInArrFormat[1]}`;
 };
 
 // function for find fitting cost to asked report by date
@@ -36,7 +32,6 @@ router.get('/:userId/allReports', async function (req, res) {
     try {
         const allReports = await Report.find({ userId: req.params.userId }).populate('costs');
         res.render('report/allReports', { 'reports': allReports, "userId": req.params.userId });
-        // res.send(allReports);
     }
     catch (err) {
         res.send("Error" + err);
@@ -84,12 +79,7 @@ router.get('/:userId/newReport', async function (req, res) {
         }
         // checking existing report
         else {
-
-            console.log(costs.length + " rishon")
-            console.log(report[0].costs.length + " sheni")
-            console.log(report[0].costs)
-            console.log(report[0].costs.length)
-
+            // case: report need get update (if cost was deleted or added)
             if (report[0].costs.length !== costsArray.length) {
                 console.log("updating existing report");
 
@@ -97,33 +87,19 @@ router.get('/:userId/newReport', async function (req, res) {
                 sum = totalSum;
 
                 await Report.findByIdAndUpdate(report[0]._id, { totalSum: totalSum, costs: costsArray });              
-            } else {
+            } else { // case: the report is up to date
                 console.log("giving previous report");
             }
         }
         res.render('report/newReport',
             {
                 'reportTitle': reportTitle,
-                'costs': costsArray, 'totalSum': sum === 0 ? report[0].totalSum : sum
+                'costs': costsArray, 'totalSum': sum === 0 ? report[0].totalSum : sum,
+                'userId':req.params.userId
             });
 
     } catch (err) {
         console.log(err + "error");
-    }
-});
-
-router.get('/:userId/:reportId', async function (req, res) {
-
-    try {
-        const report = await Report.findById(req.params.reportId).populate('costs');
-        res.render('report/newReport',
-            {
-                'reportTitle': report.title,
-                'costs': report.costs, 'totalSum': report.totalSum
-            });
-    } catch (error) {
-        console.log("Error: " + error);
-        res.send("Error: " + error);
     }
 });
 

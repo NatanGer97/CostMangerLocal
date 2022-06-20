@@ -1,13 +1,19 @@
 <% layout('layouts/skelton.ejs') %>
 <title>Get Report</title>
 <div class="container">
+  <div class="me-auto p-2">
+    <a id="addBtn" type="button" class="btn btn-outline-primary btn" data-bs-toggle="tooltip" title="Back"
+       href="/users/<%= userId %> ">
+        <span class="bi bi-house"></span>
+    </a>
+</div>
 <form class="row g-3" action="/report/<%= userId %>/newReport" method="get">
     <div style="text-align: center;">
         <img src="/images/report.gif" alt="ReportIcon" width="300" height="200" >
       </div>
     <div>
       <label for="monthInput" class="form-label"></label>
-      <input type="month" class="form-control" id="monthInput" name="date" %> ">
+      <input type="month" class="form-control" id="monthInput" name="date" required>
     </div>
    
     <button type="submit" class="btn btn-primary mb-3">Get Report</button>

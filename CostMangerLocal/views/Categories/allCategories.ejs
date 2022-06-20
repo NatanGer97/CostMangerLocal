@@ -15,7 +15,7 @@
                 <% for( let categoryIndex=0; categoryIndex < categories.length; categoryIndex++ ) { %>
                     <a type="button" class="list-group-item list-group-item-action" aria-current="true">
                         <%= categories[categoryIndex].name %>
-                        <form class="float-end" action="/categories/<%= categories[categoryIndex]._id%>/delete/"  method="post">
+                        <form class="float-end" action="/categories/<%= categories[categoryIndex]._id%>/delete/?_method=delete"  method="post">
                             <button  class="btn btn-outline-danger btn-sm bi bi-trash">
                             </button>
                         </form>

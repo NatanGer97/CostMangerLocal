@@ -1,52 +1,51 @@
-<% layout('layouts/skelton.ejs') %>
-    <title>
-        <%= cost.description %>
-    </title>
-    <a class="btn btn-outline-primary" href="<%= backLink %> ">
-        <i class="bi bi-arrow-left-circle"> Back</i>
-    </a>
+<title>
+    <%= cost.description %>
+</title>
+<a class="btn btn-outline-primary" href="<%= backLink %> ">
+    <i class="bi bi-arrow-left-circle"> Back</i>
+</a>
 
-    <div class="container">
-        <div class="position-absolute top-50 start-50 translate-middle">
-            <div class="card text-bg-light mb-3 text-center shadow p-3 mb-5 bg-body rounded" style="width: 18rem; margin-top: 10px;" ">
-        <div class=" card-header">
-                <h5>
-                    <%= cost.description.toUpperCase() %>
-                </h5>
-            </div>
+<div class="container">
+    <div class="position-absolute top-50 start-50 translate-middle">
+        <div class="card text-bg-light mb-3 text-center shadow p-3 mb-5 bg-body rounded" style="width: 18rem; margin-top: 10px;" ">
+    <div class=" card-header">
+            <h5>
+                <%= cost.description.toUpperCase() %>
+            </h5>
+        </div>
 
-            <div class="card-body">
-                <img src="/images/money.gif" class="card-img-top">
-                <ul class="list-group list-group-flush ">
-                    <li class="list-group-item">
-                        <span class="float-start">Sum:</span>
-                        <i>
-                            <%= cost.sum%><small>&#8362;</small>
-                        </i>
-                    </li>
-                    <li class="list-group-item">
-                        <span class="float-start">Category:</span>
-                        <i>
-                            <%= cost.category%>
-                        </i>
-                    </li>
-                    <li class="list-group-item">
-                        <form class="float-end" action="/users/<%= id %>/costs/<%= cost._id%>?_method=delete"
-                            method="post">
-                            <button id="buttonDelete" class="btn btn-outline-danger btn bi bi-trash">
-                            </button>
-                        </form>
-                        <form action="/costs/<%=id%>/<%= cost._id%>/edit" method="get">
-                            <button class="btn btn-outline-secondary btn bi bi-gear-fill float-start"></button>
-                        </form>
+        <div class="card-body">
+            <img src="/images/money.gif" class="card-img-top">
+            <ul class="list-group list-group-flush ">
+                <li class="list-group-item">
+                    <span class="float-start">Sum:</span>
+                    <i>
+                        <%= cost.sum%><small>&#8362;</small>
+                    </i>
+                </li>
+                <li class="list-group-item">
+                    <span class="float-start">Category:</span>
+                    <i>
+                        <%= cost.category%>
+                    </i>
+                </li>
+                <li class="list-group-item">
+                    <form class="float-end" action="/costs/<%= id %>/<%= cost._id%>?_method=delete"
+                        method="post">
+                        <button id="buttonDelete" class="btn btn-outline-danger btn bi bi-trash">
+                        </button>
+                    </form>
+                    <form action="/costs/<%=id%>/<%= cost._id%>/edit" method="get">
+                        <button class="btn btn-outline-secondary btn bi bi-gear-fill float-start"></button>
+                    </form>
 
-                    </li>
+                </li>
 
-                </ul>
+            </ul>
 
-                <div id=" costDateId" class="card-footer text-muted">
-                    <%= new Date(cost.date).toLocaleDateString() %>
-                </div>
+            <div id=" costDateId" class="card-footer text-muted">
+                <%= new Date(cost.date).toLocaleDateString() %>
             </div>
         </div>
     </div>
+</div>

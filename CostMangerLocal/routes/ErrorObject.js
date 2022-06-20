@@ -3,7 +3,7 @@ class ErrorObject {
     this.msg = msg;
     this.backLink = backLink;
     this.backButtonText = backButtonText;
-  }
+  };
 }
 
 exports.ErrorObject = ErrorObject;
