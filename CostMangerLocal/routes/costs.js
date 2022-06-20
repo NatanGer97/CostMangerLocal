@@ -5,6 +5,67 @@ const Cost = require('../models/Cost');
 
 const router = express.Router();
 
+
+
+// rout for get all cost of current user
+router.get('/:userId/', async function (req, res, next) {
+  try {
+    // return all user costs sort by category field
+    console.log(req.params);
+    const costs = await Cost.find({userId: req.params.userId});
+    console.log(costs);
+    res.render('costs/allCosts', { 'costs': costs, 'id': req.params.userId });
+  }
+  catch (error) {
+    console.log(error);
+    res.send(`Error: ${error}`);
+  }
+});
+
+
+// rout for get all cost of current use sorted by categories
+router.get('/:userId/sortByCategory', async function (req, res, next) {
+  try {
+    // return all user costs sort by category field
+    const costs = await Cost.find({userId: req.params.userId}).sort({ category: 'asc' });
+    console.log(costs);
+    res.render('costs/allCosts', { 'costs': costs, 'id': req.params.userId });
+  }
+  catch (error) {
+    console.log(error);
+    res.send(`Error: ${error}`);
+  }
+});
+
+
+// rout for handling  new cost creation request
+router.post('/:userId/', async function (req, res) {
+
+  const newCost = new Cost(req.body);
+
+  // if the date is empty, fill today date
+  newCost['date'] = req.body.date === "" ?
+    newCost['date'] = new Date().toISOString().split('T')[0] :
+    newCost['date'] = new Date(req.body.date).toISOString().split('T')[0];
+
+    const user = await User.findById(req.params.userId);
+
+    user.costs.push(newCost); // insert new cost to costs list of current user..
+    newCost.userId = req.params.userId;;
+    await user.save();
+
+    // saving new cost 
+    newCost.save().then(newCost => {
+    console.log('newCost was created: ' + newCost);
+    res.redirect(`/costs/${req.params.userId}`);
+
+  }).catch((error) => {
+    console.log(error);
+    res.send(`Error: ${error}`);
+  });
+
+});
+
 // rout for page that display the specific cost related to current login user.
 router.get('/:userId/:costId', async function (req, res, next) {
 
@@ -20,7 +81,7 @@ router.get('/:userId/:costId', async function (req, res, next) {
 
     res.render('costs/showCost', {
       'cost': targetCostToDisplay,
-      'backLink': `/users/${req.params.userId}/costs`, 'id': req.params.userId
+      'backLink': `/costs/${req.params.userId}`, 'id': req.params.userId
     });
   }
   catch (err) {
@@ -37,7 +98,7 @@ router.get("/:userId/:costId/edit", async function (req, res) {
 
     res.render("costs/editCost", {
       id: req.params.userId, cost: targetCostToUpdated,
-      categories: categories
+      categories: categories, backLink:`/costs/${req.params.userId}/${req.params.costId}`
     });
   } catch (error) {
     res.send(error);
@@ -83,7 +144,7 @@ router.delete('/:userId/:costId', async function (req, res) {
             }
             else {
               console.log("Updated user costs: " + fittingCosts);
-              res.redirect(`/users/${req.params.userId}/costs`);
+              res.redirect(`/costs/${req.params.userId}`);
             }
           });
         }
@@ -94,5 +155,6 @@ router.delete('/:userId/:costId', async function (req, res) {
     res.send("Error: k" + err);
   }
 });
+
 
 module.exports = router;

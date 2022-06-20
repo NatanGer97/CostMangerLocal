@@ -19,6 +19,18 @@
             </a>
         </div>
         <div class="p-2">
+            <form action="/costs/<%= id %>/sortByCategory">
+                <button  type="submit" class="btn btn-outline-primary btn" data-bs-toggle=" tooltip"
+                    title="Sort by category">
+                    <span class="bi bi-funnel"></span>
+                </button>
+            </form>
+          <!--   <a id="addBtn" type="button" class="btn btn-outline-primary btn" data-bs-toggle=" tooltip" title="Sort by category"
+                href="costs/<%= id %>/allCosts/">
+                <span class="bi bi-funnel">2</span>
+            </a> -->
+        </div>
+        <div class="p-2">
 
             <form action="/report/<%= id %>/getReport" method="get">
                 <button class="btn btn-outline-info bi bi-file-earmark-bar-graph" name="userId"

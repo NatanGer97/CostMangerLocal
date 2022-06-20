@@ -1,5 +1,8 @@
 <% layout('layouts/skelton.ejs') %>
 <title><%= cost.description %> </title>
+<a class="btn btn-outline-primary mb-5" href="<%= backLink %> ">
+    <i class="bi bi-arrow-left-circle"> Back</i>
+</a>
 <form class="row g-4" action="/costs/<%= id %>/<%= cost.id%>?_method=PUT" method="post">
     <div class="col-md-4">
         <label for="sum" class="form-label">Sum</label>

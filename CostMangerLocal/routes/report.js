@@ -56,7 +56,7 @@ router.get('/:userId/newReport', async function (req, res) {
 
     // user costs that fitting to desire costs
     const costsArray = reportUtilsFunctions.findFittingCost(costs, month, year);
-    let sum = 0;
+    let sum = -1;
     try {
 
         const report = await Report.find({ userId: req.params.userId, date_created: fullDate });
@@ -94,7 +94,7 @@ router.get('/:userId/newReport', async function (req, res) {
         res.render('report/newReport',
             {
                 'reportTitle': reportTitle,
-                'costs': costsArray, 'totalSum': sum === 0 ? report[0].totalSum : sum,
+                'costs': costsArray, 'totalSum': sum === -1 ? report[0].totalSum : sum,
                 'userId':req.params.userId
             });
 
