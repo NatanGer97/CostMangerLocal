@@ -7,32 +7,30 @@ const router = express.Router();
 
 // rout for main page of current user
 router.get('/:id', async function (req, res, next) {
-  try {
-    const user = await User.findById(req.params.id);
-    console.log(user);
-    CurrentLoggedInUser = user;
-    res.render('home', { 'user': user });
+    try {
+        const user = await User.findById(req.params.id);
+        console.log(user);
 
-  } catch (error) {
-    res.send(`Error: ${error}`);
-  }
+        res.render('home', {'user': user});
+
+    } catch (error) {
+        res.send(`Error: ${error}`);
+    }
 
 });
 
-
-
-// rout for creating new cost
+// rout for  page that show a form to creation of new cost
 router.get('/:id/costs/new', async function (req, res, next) {
-  try {
+    try {
 
-    const categories = await Category.find({});
-    res.render('costs/newCost.ejs', 
-    { 'categories': categories, 'id': req.params.id, backLink: req.url });
+        const categories = await Category.find({});
+        res.render('costs/newCost.ejs',
+            {'categories': categories, 'id': req.params.id, backLink: req.url});
 
-  } catch (error) {
+    } catch (error) {
 
-    res.send(`Error: ${error}`);
-  }
+        res.send(`Error: ${error}`);
+    }
 
 });
 
