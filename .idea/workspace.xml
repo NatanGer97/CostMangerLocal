@@ -3,7 +3,23 @@
   <component name="ChangeListManager">
     <list default="true" id="ba0a8c7d-e44d-4ccd-a395-746a264b7ba5" name="Changes" comment="with delete option but not work">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CostMangerLocal/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CostMangerLocal/bin/www" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/bin/www" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CostMangerLocal/models/Category.js" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/models/Category.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CostMangerLocal/models/Cost.js" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/models/Cost.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CostMangerLocal/models/Report.js" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/models/Report.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CostMangerLocal/models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/models/User.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CostMangerLocal/routes/ErrorObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/routes/ErrorObject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CostMangerLocal/routes/categories.js" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/routes/categories.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CostMangerLocal/routes/costs.js" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/routes/costs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CostMangerLocal/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/routes/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CostMangerLocal/routes/report.js" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/routes/report.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CostMangerLocal/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/routes/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CostMangerLocal/views/Categories/allCategories.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/views/Categories/allCategories.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CostMangerLocal/views/components/navbar.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/views/components/navbar.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CostMangerLocal/views/costs/allCosts.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/views/costs/allCosts.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CostMangerLocal/views/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/CostMangerLocal/views/index.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,9 +34,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="2AFvtqtUExVBGeVs7SB7JmjN53l" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -75,6 +88,8 @@
       <workItem from="1655564593434" duration="374000" />
       <workItem from="1655632954558" duration="135000" />
       <workItem from="1655633957853" duration="928000" />
+      <workItem from="1655710715492" duration="983000" />
+      <workItem from="1655808454441" duration="3023000" />
     </task>
     <servers />
   </component>
@@ -96,16 +111,5 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="with delete option but not work" />
     <option name="LAST_COMMIT_MESSAGE" value="with delete option but not work" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/CostMangerLocal/routes/index.js</url>
-          <line>101</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
