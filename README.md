@@ -1,7 +1,7 @@
 # Final Project in "Asynchronous Server-Side Development" Course
 
 ## Summary
-The is a Restfull Web Services app with full crud functionality.
+This is a Restfull Web Services app with full crud functionality.
 ###### [Video](http://https://www.youtube.com/watch?v=hNlT1pl6JUs&ab_channel=NatanGershbein "Video")
 ### App Subject
  Application that lets users track their financial expenses. 
