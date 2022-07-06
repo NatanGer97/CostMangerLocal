@@ -8,7 +8,7 @@ The is a Restfull Web Services app with full crud functionality.
 ##  Tech Stack
 - Server Side: **Express.js** framework, **mongoose** library and **JavaScript**
 - DB: **MongoDB**
-- Front: ** EJS, HTML,CSS **and** Bootstrap** 5
+- Front: **EJS, HTML,CSS **and** Bootstrap** 5
 
  ### Project functionality:
 1. Login and Logout
