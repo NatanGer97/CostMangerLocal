@@ -2,7 +2,7 @@
 
 ## Summary
 The is a Restfull Web Services app with full crud functionality.
-###### [Video](http://https://www.youtube.com/watch?v=hNlT1pl6JUs&ab_channel=NatanGershbein "Video")
+###### [Video](https://youtu.be/hNlT1pl6JUs "Video")
 ### App Subject
  Application that lets users track their financial expenses. 
 ##  Tech Stack
